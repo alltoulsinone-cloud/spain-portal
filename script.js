@@ -1,216 +1,610 @@
-<!DOCTYPE html>
-<html lang="es" dir="ltr">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portal Industrial de Empleo España-Marruecos</title>
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-</head>
-<body>
+console.log('🚀 IndusRecruit Pro cargado.');
 
-    <!-- ===== NAVBAR ===== -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-industry"></i>
-                <span>Indus<span class="highlight">Recruit</span></span>
-            </div>
-            <div class="nav-links">
-                <a href="#home" class="nav-link active"><i class="fas fa-home"></i> <span data-key="nav_home">Inicio</span></a>
-                <a href="#info" class="nav-link"><i class="fas fa-info-circle"></i> <span data-key="nav_info">Información</span></a>
-                <a href="#gallery" class="nav-link"><i class="fas fa-images"></i> <span data-key="nav_gallery">Galería</span></a>
-                <a href="#dashboard" class="nav-link" id="dashboardLink"><i class="fas fa-user-cog"></i> <span data-key="nav_dashboard">Mi cuenta</span></a>
-                <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> <span data-key="nav_contact">Contacto</span></a>
-            </div>
-            <div class="lang-switch">
-                <button id="btn-es" class="active" data-lang="es">🇪🇸 ES</button>
-                <button id="btn-ar" data-lang="ar">🇲🇦 AR</button>
-            </div>
-            <div class="mobile-menu"><i class="fas fa-bars"></i></div>
-        </div>
-    </nav>
+// ============================================================
+// 1. TRADUCCIONES (completas)
+// ============================================================
+const translations = {
+    es: {
+        nav_home: "Inicio", nav_jobs: "Ofertas", nav_apply: "Postular", nav_dashboard: "Mi cuenta", nav_contact: "Contacto",
+        badge: "+500 Contratos activos 2026",
+        hero_title: "Empleo industrial en España",
+        hero_sub: "Plataforma oficial para trabajadores marroquíes. Busca ofertas, postula y sigue tu contrato.",
+        search_title: "Consultar solicitud", input_placeholder: "Ej: ESP-2026-001", search_btn: "Buscar",
+        examples_title: "📋 Ejemplos:",
+        stat_applied: "Solicitudes", stat_accepted: "Contratos", stat_companies: "Empresas", stat_pending: "Pendientes",
+        jobs_title: "💼 Ofertas de trabajo activas", jobs_sub: "Selecciona una oferta y postula ahora mismo",
+        apply_title: "📝 Postular a una oferta", apply_sub: "Completa los 3 pasos para enviar tu solicitud",
+        step_personal: "Personal", step_professional: "Profesional", step_documents: "Documentos",
+        step_personal_title: "📌 Datos personales", step_professional_title: "💼 Experiencia y habilidades",
+        step_documents_title: "📎 Documentos y motivación",
+        label_name: "Nombre completo", label_passport: "Nº Pasaporte", label_birth: "Fecha nacimiento",
+        label_phone: "Teléfono", label_email: "Email", label_city: "Ciudad (Marruecos)",
+        label_experience: "Años de experiencia", label_education: "Nivel educativo",
+        edu_basic: "Básico", edu_media: "Secundaria", edu_superior: "Superior / Universidad",
+        label_languages: "Idiomas (marca los que hablas)",
+        label_job_select: "Oferta a la que postulas", label_cv: "Sube tu CV (PDF, máximo 2MB) - Simulación",
+        label_motivation: "Carta de motivación",
+        next_btn: "Siguiente →", prev_btn: "← Anterior", submit_final: "📨 Enviar solicitud",
+        apply_success_title: "¡Solicitud enviada con éxito!",
+        apply_success_msg: "Hemos recibido tus datos. Recibirás un correo de confirmación en 24h.",
+        apply_ref: "Tu número de referencia:",
+        login_title: "🔐 Acceso a tu contrato", login_sub: "Introduce tus credenciales",
+        login_btn: "Iniciar sesión", demo_hint: "👥 Prueba: reception_girl / 1234  |  admin / admin",
+        contract_id: "Nº contrato", contract_employer: "Empresa", contract_location: "Ubicación",
+        contract_start: "Inicio", contract_end: "Fin", contract_salary: "Salario",
+        contract_hours: "Horas", contract_benefits: "Beneficios", contract_contact: "Contacto",
+        gallery_title: "📸 Galería industrial", gallery_subtitle: "Imágenes de los centros de trabajo",
+        contact_title: "¿Necesitas ayuda?", contact_desc: "Soporte 24/7",
+        footer_desc: "Portal industrial de empleo", footer_links: "Enlaces",
+        footer_text: "© 2026 IndusRecruit. Todos los derechos reservados.",
+        footer_support: "📞 +34 900 123 456 | ✉️ contratos@indusrecruit.es",
+        not_found: "❌ No se encontró ninguna solicitud.",
+        status_accepted: "✅ Aceptada", status_pending: "⏳ Pendiente", status_rejected: "❌ Rechazada",
+        accepted_msg: "Próximamente recibirás información.", pending_msg: "Agradecemos tu paciencia.",
+        rejected_msg: "Contacta con la oficina."
+    },
+    ar: {
+        nav_home: "الرئيسية", nav_jobs: "الوظائف", nav_apply: "تقديم", nav_dashboard: "حسابي", nav_contact: "اتصل",
+        badge: "+500 عقد نشط 2026",
+        hero_title: "التوظيف الصناعي في إسبانيا",
+        hero_sub: "منصة رسمية للعمال المغاربة. ابحث عن عروض، تقدم، وتابع عقدك.",
+        search_title: "استعلام عن طلبك", input_placeholder: "مثال: ESP-2026-001", search_btn: "بحث",
+        examples_title: "📋 أمثلة:",
+        stat_applied: "طلبات", stat_accepted: "عقود", stat_companies: "شركات", stat_pending: "قيد الانتظار",
+        jobs_title: "💼 عروض عمل نشطة", jobs_sub: "اختر عرضاً وتقدم الآن",
+        apply_title: "📝 التقديم على عرض", apply_sub: "أكمل الخطوات الثلاث لإرسال طلبك",
+        step_personal: "شخصي", step_professional: "مهني", step_documents: "مستندات",
+        step_personal_title: "📌 البيانات الشخصية", step_professional_title: "💼 الخبرة والمهارات",
+        step_documents_title: "📎 المستندات والرسالة",
+        label_name: "الاسم الكامل", label_passport: "رقم جواز السفر", label_birth: "تاريخ الميلاد",
+        label_phone: "الهاتف", label_email: "البريد الإلكتروني", label_city: "المدينة (المغرب)",
+        label_experience: "سنوات الخبرة", label_education: "المستوى التعليمي",
+        edu_basic: "أساسي", edu_media: "ثانوي", edu_superior: "جامعي / عالي",
+        label_languages: "اللغات (اختر ما تتحدثه)",
+        label_job_select: "العرض الذي تتقدم إليه", label_cv: "تحميل السيرة الذاتية (PDF) - محاكاة",
+        label_motivation: "رسالة تحفيزية",
+        next_btn: "التالي →", prev_btn: "← السابق", submit_final: "📨 إرسال الطلب",
+        apply_success_title: "!تم إرسال طلبك بنجاح",
+        apply_success_msg: "لقد استلمنا بياناتك. ستتوصل برسالة تأكيد خلال 24 ساعة.",
+        apply_ref: "رقم مرجعي:",
+        login_title: "🔐 الوصول إلى عقدك", login_sub: "أدخل بياناتك لمشاهدة التفاصيل",
+        login_btn: "تسجيل الدخول", demo_hint: "👥 تجربة: reception_girl / 1234  |  admin / admin",
+        contract_id: "رقم العقد", contract_employer: "الشركة", contract_location: "الموقع",
+        contract_start: "البدء", contract_end: "الانتهاء", contract_salary: "الراتب",
+        contract_hours: "الساعات", contract_benefits: "المزايا", contract_contact: "جهة الاتصال",
+        gallery_title: "📸 معرض صناعي", gallery_subtitle: "صور من مراكز العمل والسكن",
+        contact_title: "هل تحتاج مساعدة؟", contact_desc: "دعم 24/7",
+        footer_desc: "البوابة الصناعية للتوظيف", footer_links: "روابط",
+        footer_text: "© 2026 إندس ريكروت. جميع الحقوق محفوظة.",
+        footer_support: "📞 34 900 123 456+ | ✉️ contratos@indusrecruit.es",
+        not_found: "❌ لم يتم العثور على طلب.",
+        status_accepted: "✅ مقبول", status_pending: "⏳ قيد المراجعة", status_rejected: "❌ مرفوض",
+        accepted_msg: "ستصلك معلومات قريباً.", pending_msg: "نشكر صبرك.",
+        rejected_msg: "تواصل مع المكتب."
+    }
+};
+let currentLang = 'es';
 
-    <!-- ===== HERO / SEARCH ===== -->
-    <section class="hero" id="home">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <div class="floating-badge">
-                <i class="fas fa-check-circle"></i>
-                <span data-key="badge">+500 Contratos activos 2026</span>
-            </div>
-            <h1 data-key="hero_title">Empleo industrial <span class="gradient-text">en España</span></h1>
-            <p data-key="hero_sub">Plataforma oficial para trabajadores marroquíes. Busca tu solicitud o accede a tu contrato con usuario y contraseña.</p>
+// ============================================================
+// 2. DATOS (Ofertas, Usuarios, Aplicaciones Demo)
+// ============================================================
+const jobOffers = [
+    { id: 1, title_es: "Recolector de fresas", title_ar: "قاطع فراولة", company: "Fresas del Sur S.L.", location: "Huelva", salary: "1.200€ + bonus", duration: "6 meses", sector: "agricultura" },
+    { id: 2, title_es: "Recepcionista de hotel", title_ar: "موظفة استقبال فندق", company: "Hotel Bahía del Sol", location: "Benalmádena, Málaga", salary: "1.450€", duration: "Temporada 6 meses", sector: "hosteleria" },
+    { id: 3, title_es: "Ayudante de construcción", title_ar: "مساعد بناء", company: "Construcciones Metálicas S.A.", location: "Madrid", salary: "1.600€", duration: "1 año", sector: "construccion" },
+    { id: 4, title_es: "Desarrollador web junior", title_ar: "مطور ويب مبتدئ", company: "TechSolutions", location: "Barcelona", salary: "2.100€", duration: "Indefinido", sector: "tecnologia" },
+    { id: 5, title_es: "Operario de logística", title_ar: "عامل لوجستيك", company: "LogiStar", location: "Valencia", salary: "1.350€", duration: "9 meses", sector: "logistica" }
+];
 
-            <!-- Buscador público -->
-            <div class="search-card">
-                <h3><i class="fas fa-search"></i> <span data-key="search_title">Consultar solicitud</span></h3>
-                <div class="input-group">
-                    <i class="fas fa-id-card input-icon"></i>
-                    <input type="text" id="applicationId" placeholder="Ej: ESP-2026-001" data-key="input_placeholder" />
-                    <button id="searchBtn" data-key="search_btn"><i class="fas fa-arrow-right"></i> <span>Buscar</span></button>
-                </div>
-                <div id="resultBox" class="result-box hidden"></div>
-                <div class="search-examples">
-                    <small data-key="examples_title">📋 Ejemplos para probar:</small>
-                    <div class="example-buttons">
-                        <button class="example-btn" data-code="ESP-2026-001">ESP-2026-001</button>
-                        <button class="example-btn" data-code="ESP-2026-002">ESP-2026-002</button>
-                        <button class="example-btn" data-code="ESP-2026-003">ESP-2026-003</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-down"><i class="fas fa-chevron-down"></i></div>
-    </section>
+const demoApplications = {
+    "ESP-2026-001": { status: "accepted", name_es: "Ahmed Benjelloun", name_ar: "أحمد بنجلون", id_number: "AB789012", position: "Recolector", location: "Huelva", start_date: "01.06.2026" },
+    "ESP-2026-002": { status: "pending", name_es: "Fatima Zahra", name_ar: "فاطمة الزهراء", id_number: "FZ345678", position: "Agricultora", location: "Murcia" },
+    "ESP-2026-003": { status: "rejected", name_es: "Youssef El Mansouri", name_ar: "يوسف المنصوري", id_number: "YM901234" }
+};
 
-    <!-- ===== STATS ===== -->
-    <section class="stats-section" id="stats">
-        <div class="container">
-            <div class="stat-card"><i class="fas fa-file-signature"></i><div class="stat-info"><h3 class="counter" data-target="187">0</h3><p data-key="stat_applied">Solicitudes</p></div></div>
-            <div class="stat-card"><i class="fas fa-check-circle"></i><div class="stat-info"><h3 class="counter" data-target="42">0</h3><p data-key="stat_accepted">Contratos</p></div></div>
-            <div class="stat-card"><i class="fas fa-building"></i><div class="stat-info"><h3 class="counter" data-target="25">0</h3><p data-key="stat_companies">Empresas</p></div></div>
-            <div class="stat-card"><i class="fas fa-clock"></i><div class="stat-info"><h3 class="counter" data-target="7">0</h3><p data-key="stat_days">Días respuesta</p></div></div>
-        </div>
-    </section>
+// Usuarios
+const users = {
+    "reception_girl": {
+        password: "1234",
+        contract: {
+            id: "HOT-2026-088",
+            name: "María López García",
+            position: "Recepcionista de hotel (Reception Girl)",
+            avatar: "https://i.pravatar.cc/150?img=5",
+            employer: "Hotel Bahía del Sol ****",
+            location: "Benalmádena, Málaga",
+            start: "01.05.2026",
+            end: "31.10.2026 (temporada)",
+            salary: "1.450 € + bonos",
+            hours: "39 h/semana",
+            benefits: "Seguro médico, alojamiento, comidas, formación en idiomas",
+            contact: "Sra. Elena Ruiz - +34 600 111 222"
+        }
+    },
+    "admin": {
+        password: "admin",
+        contract: null // admin no tiene contrato personal, ve el panel de admin
+    }
+};
 
-    <!-- ===== BENEFITS ===== -->
-    <section class="info-cards" id="info">
-        <div class="container">
-            <div class="section-header">
-                <h2 data-key="benefits_title">🌱 Ventajas del programa</h2>
-                <p data-key="benefits_subtitle">Todo lo que necesitas para una experiencia laboral segura y exitosa</p>
-            </div>
-            <div class="card-grid">
-                <div class="card"><div class="card-icon"><i class="fas fa-file-contract"></i></div><h3 data-key="benefit_1_title">Contratos oficiales</h3><p data-key="benefit_1_desc">Avalados por el Ministerio de Trabajo español, con salarios justos y protección social.</p></div>
-                <div class="card"><div class="card-icon"><i class="fas fa-user-graduate"></i></div><h3 data-key="benefit_2_title">Capacitación continua</h3><p data-key="benefit_2_desc">Cursos gratuitos antes y durante el empleo para mejorar tus habilidades.</p></div>
-                <div class="card"><div class="card-icon"><i class="fas fa-handshake"></i></div><h3 data-key="benefit_3_title">Asesoría legal</h3><p data-key="benefit_3_desc">Acompañamiento en visados, residencia y derechos laborales.</p></div>
-                <div class="card"><div class="card-icon"><i class="fas fa-umbrella-beach"></i></div><h3 data-key="benefit_4_title">Calidad de vida</h3><p data-key="benefit_4_desc">Alojamiento digno, seguro médico y entorno multicultural.</p></div>
-            </div>
-        </div>
-    </section>
+// ============================================================
+// 3. LOCALSTORAGE para aplicaciones
+// ============================================================
+let applications = JSON.parse(localStorage.getItem('indus_applications')) || [];
 
-    <!-- ===== LOGIN / DASHBOARD ===== -->
-    <section class="login-section" id="dashboard">
-        <div class="container">
-            <div class="section-header">
-                <h2 data-key="login_title">🔐 Acceso a tu contrato</h2>
-                <p data-key="login_sub">Introduce tus credenciales para ver todos los detalles de tu contrato</p>
-            </div>
-            <div class="login-dashboard-wrapper">
-                <!-- Formulario de login -->
-                <div id="loginForm" class="login-card">
-                    <div class="login-icon"><i class="fas fa-user-lock"></i></div>
-                    <div class="input-group-login">
-                        <i class="fas fa-user"></i>
-                        <input type="text" id="username" placeholder="Usuario" required />
-                    </div>
-                    <div class="input-group-login">
-                        <i class="fas fa-key"></i>
-                        <input type="password" id="password" placeholder="Contraseña" required />
-                    </div>
-                    <button id="loginBtn" class="btn-primary"><i class="fas fa-sign-in-alt"></i> <span data-key="login_btn">Iniciar sesión</span></button>
-                    <div id="loginError" class="error-msg hidden"></div>
-                    <p class="demo-hint" data-key="demo_hint">👥 Usuarios de prueba: reception_girl / 1234  |  admin / admin</p>
-                </div>
+function saveApplications() {
+    localStorage.setItem('indus_applications', JSON.stringify(applications));
+}
 
-                <!-- Dashboard (oculto hasta login) -->
-                <div id="dashboardContent" class="dashboard-card hidden">
-                    <div class="dashboard-header">
-                        <div class="user-profile">
-                            <img id="userAvatar" src="https://i.pravatar.cc/150?img=5" alt="Avatar" />
-                            <div>
-                                <h2 id="userFullName">Nombre Usuario</h2>
-                                <p id="userPosition">Cargo</p>
-                            </div>
-                        </div>
-                        <button id="logoutBtn" class="btn-secondary"><i class="fas fa-sign-out-alt"></i> Salir</button>
-                    </div>
-                    <div class="contract-details">
-                        <h3>📄 Detalles del contrato</h3>
-                        <div class="contract-grid">
-                            <div class="contract-item"><span data-key="contract_id">Nº contrato:</span> <strong id="contractId">---</strong></div>
-                            <div class="contract-item"><span data-key="contract_employer">Empresa:</span> <strong id="contractEmployer">---</strong></div>
-                            <div class="contract-item"><span data-key="contract_location">Ubicación:</span> <strong id="contractLocation">---</strong></div>
-                            <div class="contract-item"><span data-key="contract_start">Inicio:</span> <strong id="contractStart">---</strong></div>
-                            <div class="contract-item"><span data-key="contract_end">Fin:</span> <strong id="contractEnd">---</strong></div>
-                            <div class="contract-item"><span data-key="contract_salary">Salario (mes):</span> <strong id="contractSalary">---</strong></div>
-                            <div class="contract-item"><span data-key="contract_hours">Horas semanales:</span> <strong id="contractHours">---</strong></div>
-                            <div class="contract-item"><span data-key="contract_benefits">Beneficios:</span> <strong id="contractBenefits">---</strong></div>
-                            <div class="contract-item"><span data-key="contract_contact">Contacto emergencia:</span> <strong id="contractContact">---</strong></div>
-                        </div>
-                    </div>
-                    <div class="dashboard-charts">
-                        <h3>📊 Estadísticas del sector</h3>
-                        <div class="chart-container">
-                            <div class="pie-chart" id="pieChart">
-                                <!-- Simulación de gráfico circular con CSS -->
-                            </div>
-                            <div class="bar-chart" id="barChart">
-                                <!-- Barras horizontales -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+// ============================================================
+// 4. FUNCIONES PRINCIPALES
+// ============================================================
+function updateLanguage(lang) {
+    currentLang = lang;
+    document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (translations[lang] && translations[lang][key]) {
+            if (el.tagName === 'INPUT' && el.getAttribute('data-key') === 'input_placeholder') {
+                el.placeholder = translations[lang][key];
+            } else if (el.tagName === 'BUTTON' && (key === 'search_btn' || key === 'login_btn' || key === 'submit_final' || key === 'next_btn' || key === 'prev_btn')) {
+                const span = el.querySelector('span');
+                if (span) span.innerText = translations[lang][key];
+                else el.innerText = translations[lang][key];
+            } else if (el.tagName === 'OPTION') {
+                // handled manually via innerText mapping in updateSelectOptions
+            } else {
+                el.innerText = translations[lang][key];
+            }
+        }
+    });
+    // Update selects manually
+    updateSelectOptions();
+    document.documentElement.lang = lang === 'ar' ? 'ar' : 'es';
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.querySelectorAll('.lang-switch button').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    // Re-render jobs and dashboard if visible
+    renderJobs();
+}
 
-    <!-- ===== GALLERY ===== -->
-    <section class="gallery" id="gallery">
-        <div class="container">
-            <div class="section-header">
-                <h2 data-key="gallery_title">📸 Galería industrial</h2>
-                <p data-key="gallery_subtitle">Imágenes de los centros de trabajo y alojamientos</p>
-            </div>
-            <div class="grid-gallery">
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=600" alt="Campo" loading="lazy" /><div class="overlay"><span>Agricultura</span></div></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600" alt="Construcción" loading="lazy" /><div class="overlay"><span>Construcción</span></div></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1534190239940-9ba8944ea261?w=600" alt="Hostelería" loading="lazy" /><div class="overlay"><span>Hostelería</span></div></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600" alt="Tecnología" loading="lazy" /><div class="overlay"><span>Tecnología</span></div></div>
-            </div>
-        </div>
-    </section>
+function updateSelectOptions() {
+    // Education
+    document.querySelectorAll('#education option').forEach(opt => {
+        const key = opt.value === 'basico' ? 'edu_basic' : opt.value === 'media' ? 'edu_media' : 'edu_superior';
+        if (translations[currentLang] && translations[currentLang][key]) {
+            opt.innerText = translations[currentLang][key];
+        }
+    });
+    // Job select
+    const jobSelect = document.getElementById('jobSelect');
+    if (jobSelect) {
+        const currentVal = jobSelect.value;
+        jobSelect.innerHTML = `<option value="">-- ${translations[currentLang]['label_job_select'] || 'Selecciona'} --</option>`;
+        jobOffers.forEach(job => {
+            const opt = document.createElement('option');
+            opt.value = job.id;
+            const title = currentLang === 'ar' ? job.title_ar : job.title_es;
+            opt.textContent = `${title} - ${job.company}`;
+            jobSelect.appendChild(opt);
+        });
+        jobSelect.value = currentVal;
+    }
+}
 
-    <!-- ===== CONTACT ===== -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h2 data-key="contact_title">¿Necesitas ayuda?</h2>
-                    <p data-key="contact_desc">Soporte 24/7 para trabajadores</p>
-                    <div class="contact-details">
-                        <div class="contact-item"><i class="fas fa-phone-alt"></i><div><strong>Teléfono</strong><p>+34 900 123 456</p></div></div>
-                        <div class="contact-item"><i class="fas fa-envelope"></i><div><strong>Email</strong><p>contratos@indusrecruit.es</p></div></div>
-                        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><div><strong>Oficina Marruecos</strong><p>Casablanca, Maroc</p></div></div>
-                    </div>
-                </div>
-                <form class="contact-form" id="contactForm">
-                    <input type="text" placeholder="Tu nombre" required />
-                    <input type="email" placeholder="Tu email" required />
-                    <input type="text" placeholder="Nº de contrato (opcional)" />
-                    <textarea rows="4" placeholder="Mensaje" required></textarea>
-                    <button type="submit"><i class="fas fa-paper-plane"></i> Enviar</button>
-                </form>
+function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.remove('hidden');
+    const colors = { success: '#2ecc71', error: '#e74c3c', info: '#f39c12' };
+    t.style.background = colors[type] || colors.success;
+    t.style.color = '#0a0f1a';
+    setTimeout(() => t.classList.add('hidden'), 4000);
+}
+
+// ===== JOBS =====
+function renderJobs() {
+    const grid = document.getElementById('jobsGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    jobOffers.forEach(job => {
+        const title = currentLang === 'ar' ? job.title_ar : job.title_es;
+        const card = document.createElement('div');
+        card.className = 'job-card';
+        card.innerHTML = `
+            <div class="badge">${job.sector}</div>
+            <h3>${title}</h3>
+            <div class="company">${job.company}</div>
+            <div class="details">
+                <span><i class="fas fa-map-marker-alt"></i> ${job.location}</span>
+                <span><i class="fas fa-euro-sign"></i> ${job.salary}</span>
+                <span><i class="fas fa-clock"></i> ${job.duration}</span>
             </div>
-        </div>
-    </section>
+            <button class="apply-btn" data-id="${job.id}"><i class="fas fa-paper-plane"></i> ${translations[currentLang]['nav_apply'] || 'Postular'}</button>
+        `;
+        grid.appendChild(card);
+    });
+    // Event listeners para los botones de aplicar
+    document.querySelectorAll('.apply-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const jobId = parseInt(this.dataset.id);
+            const job = jobOffers.find(j => j.id === jobId);
+            if (job) {
+                const select = document.getElementById('jobSelect');
+                if (select) select.value = jobId;
+                // Ir a la sección de aplicación y step 1
+                document.getElementById('apply-section').scrollIntoView({ behavior: 'smooth' });
+                // Resetear steps al step 1
+                goToStep(1);
+            }
+        });
+    });
+}
 
-    <!-- ===== FOOTER ===== -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section"><h3><i class="fas fa-industry"></i> IndusRecruit</h3><p data-key="footer_desc">Portal industrial de empleo entre España y Marruecos</p></div>
-                <div class="footer-section"><h4 data-key="footer_links">Enlaces</h4><ul><li><a href="#home" data-key="nav_home">Inicio</a></li><li><a href="#info" data-key="nav_info">Información</a></li><li><a href="#gallery" data-key="nav_gallery">Galería</a></li></ul></div>
-                <div class="footer-section"><h4>Síguenos</h4><div class="social-links"><a href="#"><i class="fab fa-facebook"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fab fa-instagram"></i></a></div></div>
-            </div>
-            <div class="footer-bottom"><p data-key="footer_text">© 2026 IndusRecruit. Todos los derechos reservados.</p><p data-key="footer_support">📞 +34 900 123 456 | ✉️ contratos@indusrecruit.es</p></div>
-        </div>
-    </footer>
+// ===== MULTI-STEP FORM =====
+let currentStep = 1;
 
-    <div id="toast" class="toast hidden"></div>
+function goToStep(step) {
+    currentStep = step;
+    // Hide all steps
+    document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+    // Show target
+    const target = document.getElementById('step' + step);
+    if (target) target.classList.add('active');
+    // Update indicators
+    document.querySelectorAll('.step-indicator').forEach((ind, idx) => {
+        ind.classList.toggle('active', idx + 1 <= step);
+    });
+    // Update line
+    const fill = document.getElementById('stepLineFill');
+    if (fill) fill.style.width = ((step - 1) / 2 * 100) + '%';
+}
 
-    <script src="script.js"></script>
-</body>
-</html>
+function setupForm() {
+    // Buttons Next
+    document.querySelectorAll('[data-next]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const next = parseInt(this.dataset.next);
+            // Validate current step before moving
+            if (currentStep === 1) {
+                const name = document.getElementById('fullName').value.trim();
+                const passport = document.getElementById('passport').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                if (!name || !passport || !phone) {
+                    showToast(translations[currentLang]['label_name'] + ' y ' + translations[currentLang]['label_phone'] + ' son obligatorios', 'error');
+                    return;
+                }
+            }
+            if (currentStep === 2) {
+                const job = document.getElementById('jobSelect').value;
+                if (!job) {
+                    showToast(translations[currentLang]['label_job_select'] + ' es obligatorio', 'error');
+                    return;
+                }
+            }
+            goToStep(next);
+        });
+    });
+    // Buttons Prev
+    document.querySelectorAll('[data-prev]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const prev = parseInt(this.dataset.prev);
+            goToStep(prev);
+        });
+    });
+
+    // Submit
+    document.getElementById('applyForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Collect data
+        const name = document.getElementById('fullName').value.trim();
+        const passport = document.getElementById('passport').value.trim();
+        const birth = document.getElementById('birthDate').value;
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const city = document.getElementById('city').value.trim();
+        const experience = document.getElementById('experience').value || 0;
+        const education = document.getElementById('education').value;
+        const langs = [...document.querySelectorAll('.langCheck:checked')].map(el => el.value);
+        const jobId = parseInt(document.getElementById('jobSelect').value);
+        const job = jobOffers.find(j => j.id === jobId);
+        const motivation = document.getElementById('motivation').value.trim();
+
+        if (!name || !passport || !phone || !jobId) {
+            showToast('Faltan datos obligatorios', 'error');
+            return;
+        }
+
+        // Crear aplicación
+        const ref = 'APP-' + Date.now().toString().slice(-6);
+        const newApp = {
+            ref: ref,
+            name: name,
+            passport: passport,
+            birth: birth,
+            phone: phone,
+            email: email,
+            city: city,
+            experience: experience,
+            education: education,
+            languages: langs,
+            jobId: jobId,
+            jobTitle: job ? (currentLang === 'ar' ? job.title_ar : job.title_es) : 'Unknown',
+            motivation: motivation,
+            status: 'pending', // pending, accepted, rejected
+            appliedAt: new Date().toISOString()
+        };
+        applications.push(newApp);
+        saveApplications();
+
+        // Mostrar éxito
+        document.getElementById('applySuccess').classList.remove('hidden');
+        document.getElementById('refNumber').textContent = ref;
+        document.getElementById('applyForm').reset();
+        // Actualizar stats
+        updateStats();
+
+        // Ocultar mensaje después de 5 segundos (opcional)
+        setTimeout(() => {
+            // scroll to top of apply section
+            document.getElementById('apply-section').scrollIntoView({ behavior: 'smooth' });
+        }, 500);
+        showToast(translations[currentLang]['apply_success_title'] || 'Enviado!', 'success');
+    });
+}
+
+// ===== SEARCH =====
+function displayResult(appId) {
+    const resultDiv = document.getElementById('resultBox');
+    if (!resultDiv) return;
+    // Buscar primero en aplicaciones guardadas (localStorage)
+    let app = applications.find(a => a.ref === appId);
+    if (!app) {
+        // Buscar en demoApplications
+        const demo = demoApplications[appId];
+        if (demo) {
+            app = { ...demo, ref: appId, jobTitle: demo.position || 'N/A' };
+        }
+    }
+    if (!app) {
+        resultDiv.innerHTML = `<p>${translations[currentLang].not_found}</p>`;
+        resultDiv.className = 'result-box';
+        showToast(translations[currentLang].not_found, 'error');
+        return;
+    }
+    const statusText = translations[currentLang]['status_' + app.status] || app.status;
+    const msg = translations[currentLang][app.status + '_msg'] || '';
+    const name = app.name_es || app.name || 'Unknown';
+    let details = `<strong>📌 Ref:</strong> ${app.ref}`;
+    if (app.jobTitle) details += `<br><strong>${currentLang==='ar'?'المنصب':'Puesto'}:</strong> ${app.jobTitle}`;
+    if (app.location) details += `<br><strong>${currentLang==='ar'?'الموقع':'Ubicación'}:</strong> ${app.location}`;
+    if (app.start_date) details += `<br><strong>${currentLang==='ar'?'تاريخ البدء':'Fecha inicio'}:</strong> ${app.start_date}`;
+    resultDiv.innerHTML = `<h3>${name}</h3><p><strong>${statusText}</strong></p><p>${msg}</p><div style="margin-top:12px;border-top:1px solid rgba(255,255,255,0.1);padding-top:12px;">${details}</div>`;
+    resultDiv.className = `result-box ${app.status}`;
+    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ===== STATS =====
+function updateStats() {
+    const total = applications.length + Object.keys(demoApplications).length;
+    const accepted = applications.filter(a => a.status === 'accepted').length + 1; // +1 por demo
+    const pending = applications.filter(a => a.status === 'pending').length + 1;
+    const companies = new Set([...jobOffers.map(j => j.company), ...applications.map(a => a.jobTitle)]).size;
+    document.getElementById('totalApps').textContent = total;
+    document.getElementById('totalAccepted').textContent = accepted;
+    document.getElementById('totalPending').textContent = pending;
+    document.getElementById('totalCompanies').textContent = companies || 25;
+}
+
+// ===== DASHBOARD / LOGIN =====
+function renderAdminTable() {
+    const tbody = document.getElementById('adminTableBody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    // Combinar demo + aplicaciones guardadas
+    const allApps = [...applications];
+    Object.keys(demoApplications).forEach(key => {
+        const d = demoApplications[key];
+        allApps.push({ ref: key, name_es: d.name_es, name_ar: d.name_ar, jobTitle: d.position || 'N/A', status: d.status });
+    });
+    allApps.forEach(app => {
+        const tr = document.createElement('tr');
+        const name = currentLang === 'ar' ? app.name_ar || app.name : app.name_es || app.name;
+        const statusClass = 'status-' + app.status;
+        const statusText = translations[currentLang]['status_' + app.status] || app.status;
+        tr.innerHTML = `
+            <td><strong>${app.ref}</strong></td>
+            <td>${name || 'N/A'}</td>
+            <td>${app.jobTitle || 'N/A'}</td>
+            <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+            <td>
+                <button class="action-btn" onclick="changeStatus('${app.ref}', 'accepted')">✅</button>
+                <button class="action-btn" onclick="changeStatus('${app.ref}', 'pending')">⏳</button>
+                <button class="action-btn" onclick="changeStatus('${app.ref}', 'rejected')">❌</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function changeStatus(ref, newStatus) {
+    // Buscar en localStorage
+    let app = applications.find(a => a.ref === ref);
+    if (app) {
+        app.status = newStatus;
+        saveApplications();
+        showToast(`Estado cambiado a ${newStatus}`, 'info');
+        renderAdminTable();
+        updateStats();
+        return;
+    }
+    // Buscar en demo (solo lectura)
+    if (demoApplications[ref]) {
+        showToast('No se puede modificar una solicitud de demostración', 'error');
+        return;
+    }
+    showToast('Solicitud no encontrada', 'error');
+}
+
+function login(username, password) {
+    const cleanUser = username.toLowerCase().trim();
+    const user = users[cleanUser];
+    if (!user || user.password !== password) {
+        const err = document.getElementById('loginError');
+        if (err) { err.textContent = '❌ ' + (currentLang === 'ar' ? 'بيانات دخول خاطئة' : 'Credenciales incorrectas'); err.classList.remove('hidden'); }
+        return false;
+    }
+    document.getElementById('loginError').classList.add('hidden');
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('dashboardContent').classList.remove('hidden');
+
+    // Si es admin
+    if (cleanUser === 'admin') {
+        document.getElementById('adminPanel').classList.remove('hidden');
+        document.getElementById('contractPanel').classList.add('hidden');
+        renderAdminTable();
+        document.getElementById('userFullName').textContent = 'Administrador';
+        document.getElementById('userPosition').textContent = 'Supervisor de contratos';
+        document.getElementById('userAvatar').src = 'https://i.pravatar.cc/150?img=3';
+        showToast('Bienvenido Admin', 'success');
+        return true;
+    }
+
+    // Usuario normal (reception_girl)
+    document.getElementById('adminPanel').classList.add('hidden');
+    document.getElementById('contractPanel').classList.remove('hidden');
+    const c = user.contract;
+    document.getElementById('userAvatar').src = c.avatar;
+    document.getElementById('userFullName').textContent = c.name;
+    document.getElementById('userPosition').textContent = c.position;
+    document.getElementById('contractId').textContent = c.id;
+    document.getElementById('contractEmployer').textContent = c.employer;
+    document.getElementById('contractLocation').textContent = c.location;
+    document.getElementById('contractStart').textContent = c.start;
+    document.getElementById('contractEnd').textContent = c.end;
+    document.getElementById('contractSalary').textContent = c.salary;
+    document.getElementById('contractHours').textContent = c.hours;
+    document.getElementById('contractBenefits').textContent = c.benefits;
+    document.getElementById('contractContact').textContent = c.contact;
+    renderBarChart();
+    showToast('Bienvenido ' + c.name, 'success');
+    return true;
+}
+
+function logout() {
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('dashboardContent').classList.add('hidden');
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+    showToast(currentLang === 'ar' ? 'تم تسجيل الخروج' : 'Sesión cerrada', 'info');
+}
+
+function renderBarChart() {
+    const container = document.getElementById('barChart');
+    if (!container) return;
+    const data = [
+        { label: 'Agricultura', value: 45 },
+        { label: 'Hostelería', value: 30 },
+        { label: 'Construcción', value: 20 },
+        { label: 'Tecnología', value: 15 },
+        { label: 'Otros', value: 10 }
+    ];
+    container.innerHTML = '';
+    data.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'bar-item';
+        const span = document.createElement('span');
+        span.textContent = item.label;
+        const track = document.createElement('div');
+        track.className = 'bar-track';
+        const fill = document.createElement('div');
+        fill.className = 'bar-fill';
+        fill.style.width = '0%';
+        track.appendChild(fill);
+        div.appendChild(span);
+        div.appendChild(track);
+        container.appendChild(div);
+        setTimeout(() => { fill.style.width = item.value + '%'; }, 400);
+    });
+}
+
+// ============================================================
+// 5. EVENTOS
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ DOM listo.');
+
+    // Idioma
+    document.getElementById('btn-es').addEventListener('click', () => updateLanguage('es'));
+    document.getElementById('btn-ar').addEventListener('click', () => updateLanguage('ar'));
+
+    // Buscar
+    document.getElementById('searchBtn').addEventListener('click', function() {
+        const id = document.getElementById('applicationId').value.trim();
+        if (!id) { showToast(currentLang === 'ar' ? 'أدخل رقم الطلب' : 'Introduce un número', 'error'); return; }
+        displayResult(id);
+    });
+    document.getElementById('applicationId').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') document.getElementById('searchBtn').click();
+    });
+    document.querySelectorAll('.example-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.getElementById('applicationId').value = this.dataset.code;
+            document.getElementById('searchBtn').click();
+        });
+    });
+
+    // Scroll down
+    document.querySelector('.scroll-down')?.addEventListener('click', () => {
+        window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+    });
+
+    // Contacto
+    document.getElementById('contactForm')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        showToast(currentLang === 'ar' ? 'تم الإرسال' : 'Mensaje enviado', 'success');
+        this.reset();
+    });
+
+    // Login
+    document.getElementById('loginBtn').addEventListener('click', function() {
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        if (!username || !password) {
+            showToast(currentLang === 'ar' ? 'أدخل البيانات' : 'Ingresa credenciales', 'error');
+            return;
+        }
+        login(username, password);
+    });
+    document.getElementById('password').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') document.getElementById('loginBtn').click();
+    });
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+
+    // Dashboard link scroll
+    document.getElementById('dashboardLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Mobile menu
+    document.getElementById('mobileMenu').addEventListener('click', function() {
+        document.getElementById('navLinks').classList.toggle('show');
+    });
+
+    // Inicializar
+    updateLanguage('es');
+    renderJobs();
+    setupForm();
+    updateStats();
+    // Inicializar bar chart si está visible (por si el login ya está abierto)
+    setTimeout(() => renderBarChart(), 300);
+
+    // Función global para changeStatus (usada en onclick de admin table)
+    window.changeStatus = changeStatus;
+
+    console.log('🎯 IndusRecruit Pro listo.');
+});
