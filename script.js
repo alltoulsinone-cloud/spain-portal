@@ -1,7 +1,7 @@
 console.log('🚀 IndusRecruit Pro cargado.');
 
 // ============================================================
-// 1. TRADUCCIONES (completas)
+// 1. TRADUCCIONES (opcional - puedes modificar los textos aquí)
 // ============================================================
 const translations = {
     es: {
@@ -9,8 +9,7 @@ const translations = {
         badge: "+500 Contratos activos 2026",
         hero_title: "Empleo industrial en España",
         hero_sub: "Plataforma oficial para trabajadores marroquíes. Busca ofertas, postula y sigue tu contrato.",
-        search_title: "Consultar solicitud", input_placeholder: "Ej: ESP-2026-001", search_btn: "Buscar",
-        examples_title: "📋 Ejemplos:",
+        search_title: "Consultar solicitud", input_placeholder: "Ej: APP-123456", search_btn: "Buscar",
         stat_applied: "Solicitudes", stat_accepted: "Contratos", stat_companies: "Empresas", stat_pending: "Pendientes",
         jobs_title: "💼 Ofertas de trabajo activas", jobs_sub: "Selecciona una oferta y postula ahora mismo",
         apply_title: "📝 Postular a una oferta", apply_sub: "Completa los 3 pasos para enviar tu solicitud",
@@ -22,17 +21,18 @@ const translations = {
         label_experience: "Años de experiencia", label_education: "Nivel educativo",
         edu_basic: "Básico", edu_media: "Secundaria", edu_superior: "Superior / Universidad",
         label_languages: "Idiomas (marca los que hablas)",
-        label_job_select: "Oferta a la que postulas", label_cv: "Sube tu CV (PDF, máximo 2MB) - Simulación",
+        label_job_select: "Oferta a la que postulas", label_cv: "Sube tu CV",
         label_motivation: "Carta de motivación",
         next_btn: "Siguiente →", prev_btn: "← Anterior", submit_final: "📨 Enviar solicitud",
         apply_success_title: "¡Solicitud enviada con éxito!",
         apply_success_msg: "Hemos recibido tus datos. Recibirás un correo de confirmación en 24h.",
         apply_ref: "Tu número de referencia:",
         login_title: "🔐 Acceso a tu contrato", login_sub: "Introduce tus credenciales",
-        login_btn: "Iniciar sesión", demo_hint: "👥 Prueba: reception_girl / 1234  |  admin / admin",
+        login_btn: "Iniciar sesión",
         contract_id: "Nº contrato", contract_employer: "Empresa", contract_location: "Ubicación",
         contract_start: "Inicio", contract_end: "Fin", contract_salary: "Salario",
         contract_hours: "Horas", contract_benefits: "Beneficios", contract_contact: "Contacto",
+        stat_status: "Estado",
         gallery_title: "📸 Galería industrial", gallery_subtitle: "Imágenes de los centros de trabajo",
         contact_title: "¿Necesitas ayuda?", contact_desc: "Soporte 24/7",
         footer_desc: "Portal industrial de empleo", footer_links: "Enlaces",
@@ -48,8 +48,7 @@ const translations = {
         badge: "+500 عقد نشط 2026",
         hero_title: "التوظيف الصناعي في إسبانيا",
         hero_sub: "منصة رسمية للعمال المغاربة. ابحث عن عروض، تقدم، وتابع عقدك.",
-        search_title: "استعلام عن طلبك", input_placeholder: "مثال: ESP-2026-001", search_btn: "بحث",
-        examples_title: "📋 أمثلة:",
+        search_title: "استعلام عن طلبك", input_placeholder: "مثال: APP-123456", search_btn: "بحث",
         stat_applied: "طلبات", stat_accepted: "عقود", stat_companies: "شركات", stat_pending: "قيد الانتظار",
         jobs_title: "💼 عروض عمل نشطة", jobs_sub: "اختر عرضاً وتقدم الآن",
         apply_title: "📝 التقديم على عرض", apply_sub: "أكمل الخطوات الثلاث لإرسال طلبك",
@@ -61,17 +60,18 @@ const translations = {
         label_experience: "سنوات الخبرة", label_education: "المستوى التعليمي",
         edu_basic: "أساسي", edu_media: "ثانوي", edu_superior: "جامعي / عالي",
         label_languages: "اللغات (اختر ما تتحدثه)",
-        label_job_select: "العرض الذي تتقدم إليه", label_cv: "تحميل السيرة الذاتية (PDF) - محاكاة",
+        label_job_select: "العرض الذي تتقدم إليه", label_cv: "تحميل السيرة الذاتية",
         label_motivation: "رسالة تحفيزية",
         next_btn: "التالي →", prev_btn: "← السابق", submit_final: "📨 إرسال الطلب",
         apply_success_title: "!تم إرسال طلبك بنجاح",
         apply_success_msg: "لقد استلمنا بياناتك. ستتوصل برسالة تأكيد خلال 24 ساعة.",
         apply_ref: "رقم مرجعي:",
         login_title: "🔐 الوصول إلى عقدك", login_sub: "أدخل بياناتك لمشاهدة التفاصيل",
-        login_btn: "تسجيل الدخول", demo_hint: "👥 تجربة: reception_girl / 1234  |  admin / admin",
+        login_btn: "تسجيل الدخول",
         contract_id: "رقم العقد", contract_employer: "الشركة", contract_location: "الموقع",
         contract_start: "البدء", contract_end: "الانتهاء", contract_salary: "الراتب",
         contract_hours: "الساعات", contract_benefits: "المزايا", contract_contact: "جهة الاتصال",
+        stat_status: "الحالة",
         gallery_title: "📸 معرض صناعي", gallery_subtitle: "صور من مراكز العمل والسكن",
         contact_title: "هل تحتاج مساعدة؟", contact_desc: "دعم 24/7",
         footer_desc: "البوابة الصناعية للتوظيف", footer_links: "روابط",
@@ -86,49 +86,127 @@ const translations = {
 let currentLang = 'es';
 
 // ============================================================
-// 2. DATOS (Ofertas, Usuarios, Aplicaciones Demo)
+// 2. 🟢🔵🔴 ====== SECCIÓN DE EMPLEADOS (CAMBIA AQUÍ LOS DATOS) ======
+// ============================================================
+// ✅ PARA AÑADIR UN NUEVO EMPLEADO: copia y pega el bloque y cambia los valores.
+// ✅ PARA MODIFICAR: cambia los valores dentro del bloque.
+// ✅ PARA ELIMINAR: borra el bloque completo.
+// ============================================================
+
+const employees = {
+    // --- EJEMPLO 1: Recepcionista de hotel ---
+    "reception_girl": {
+        password: "1234",                           // 🔑 Contraseña de acceso
+        contract: {
+            id: "HOT-2026-088",                     // 📝 Número de contrato
+            name: "María López García",             // 👤 Nombre completo
+            position: "Recepcionista de hotel",     // 💼 Cargo / Puesto
+            avatar: "https://i.pravatar.cc/150?img=5", // 🖼️ Foto de perfil (URL)
+            employer: "Hotel Bahía del Sol ****",   // 🏢 Empresa
+            location: "Benalmádena, Málaga",        // 📍 Ubicación
+            start: "01.05.2026",                    // 📅 Fecha de inicio
+            end: "31.10.2026 (temporada)",          // 📅 Fecha de fin
+            salary: "1.450 € + bonos",              // 💰 Salario
+            hours: "39 h/semana",                   // ⏰ Horas semanales
+            benefits: "Seguro médico, alojamiento, comidas, formación en idiomas", // 🎁 Beneficios
+            contact: "Sra. Elena Ruiz - +34 600 111 222" // 📞 Contacto de emergencia
+        }
+    },
+
+    // --- EJEMPLO 2: Administrador (NO BORRAR) ---
+    "admin": {
+        password: "admin",
+        contract: null // ⚠️ No tocar - esto es para el panel de administración
+    }
+
+    // --- AÑADE MÁS EMPLEADOS AQUÍ ---
+    // Ejemplo:
+    // "nombre_usuario": {
+    //     password: "contraseña",
+    //     contract: {
+    //         id: "CON-2026-001",
+    //         name: "Nombre Apellido",
+    //         position: "Cargo",
+    //         avatar: "https://i.pravatar.cc/150?img=10",
+    //         employer: "Empresa S.L.",
+    //         location: "Ciudad, País",
+    //         start: "01.01.2026",
+    //         end: "31.12.2026",
+    //         salary: "2.000 €",
+    //         hours: "40 h/semana",
+    //         benefits: "Seguro médico, transporte",
+    //         contact: "RRHH - +34 600 000 000"
+    //     }
+    // }
+};
+
+// ============================================================
+// 3. OFERTAS DE TRABAJO (modifica aquí también)
 // ============================================================
 const jobOffers = [
-    { id: 1, title_es: "Recolector de fresas", title_ar: "قاطع فراولة", company: "Fresas del Sur S.L.", location: "Huelva", salary: "1.200€ + bonus", duration: "6 meses", sector: "agricultura" },
-    { id: 2, title_es: "Recepcionista de hotel", title_ar: "موظفة استقبال فندق", company: "Hotel Bahía del Sol", location: "Benalmádena, Málaga", salary: "1.450€", duration: "Temporada 6 meses", sector: "hosteleria" },
-    { id: 3, title_es: "Ayudante de construcción", title_ar: "مساعد بناء", company: "Construcciones Metálicas S.A.", location: "Madrid", salary: "1.600€", duration: "1 año", sector: "construccion" },
-    { id: 4, title_es: "Desarrollador web junior", title_ar: "مطور ويب مبتدئ", company: "TechSolutions", location: "Barcelona", salary: "2.100€", duration: "Indefinido", sector: "tecnologia" },
-    { id: 5, title_es: "Operario de logística", title_ar: "عامل لوجستيك", company: "LogiStar", location: "Valencia", salary: "1.350€", duration: "9 meses", sector: "logistica" }
+    { 
+        id: 1, 
+        title_es: "Recolector de fresas", 
+        title_ar: "قاطع فراولة", 
+        company: "Fresas del Sur S.L.", 
+        location: "Huelva", 
+        salary: "1.200€ + bonus", 
+        duration: "6 meses", 
+        sector: "agricultura" 
+    },
+    { 
+        id: 2, 
+        title_es: "Recepcionista de hotel", 
+        title_ar: "موظفة استقبال فندق", 
+        company: "Hotel Bahía del Sol", 
+        location: "Benalmádena, Málaga", 
+        salary: "1.450€", 
+        duration: "Temporada 6 meses", 
+        sector: "hosteleria" 
+    },
+    { 
+        id: 3, 
+        title_es: "Ayudante de construcción", 
+        title_ar: "مساعد بناء", 
+        company: "Construcciones Metálicas S.A.", 
+        location: "Madrid", 
+        salary: "1.600€", 
+        duration: "1 año", 
+        sector: "construccion" 
+    },
+    { 
+        id: 4, 
+        title_es: "Desarrollador web junior", 
+        title_ar: "مطور ويب مبتدئ", 
+        company: "TechSolutions", 
+        location: "Barcelona", 
+        salary: "2.100€", 
+        duration: "Indefinido", 
+        sector: "tecnologia" 
+    },
+    { 
+        id: 5, 
+        title_es: "Operario de logística", 
+        title_ar: "عامل لوجستيك", 
+        company: "LogiStar", 
+        location: "Valencia", 
+        salary: "1.350€", 
+        duration: "9 meses", 
+        sector: "logistica" 
+    }
 ];
 
+// ============================================================
+// 4. DATOS DE DEMOSTRACIÓN (para búsqueda - puedes vaciarlos)
+// ============================================================
 const demoApplications = {
     "ESP-2026-001": { status: "accepted", name_es: "Ahmed Benjelloun", name_ar: "أحمد بنجلون", id_number: "AB789012", position: "Recolector", location: "Huelva", start_date: "01.06.2026" },
     "ESP-2026-002": { status: "pending", name_es: "Fatima Zahra", name_ar: "فاطمة الزهراء", id_number: "FZ345678", position: "Agricultora", location: "Murcia" },
     "ESP-2026-003": { status: "rejected", name_es: "Youssef El Mansouri", name_ar: "يوسف المنصوري", id_number: "YM901234" }
 };
 
-// Usuarios
-const users = {
-    "reception_girl": {
-        password: "1234",
-        contract: {
-            id: "HOT-2026-088",
-            name: "María López García",
-            position: "Recepcionista de hotel (Reception Girl)",
-            avatar: "https://i.pravatar.cc/150?img=5",
-            employer: "Hotel Bahía del Sol ****",
-            location: "Benalmádena, Málaga",
-            start: "01.05.2026",
-            end: "31.10.2026 (temporada)",
-            salary: "1.450 € + bonos",
-            hours: "39 h/semana",
-            benefits: "Seguro médico, alojamiento, comidas, formación en idiomas",
-            contact: "Sra. Elena Ruiz - +34 600 111 222"
-        }
-    },
-    "admin": {
-        password: "admin",
-        contract: null // admin no tiene contrato personal, ve el panel de admin
-    }
-};
-
 // ============================================================
-// 3. LOCALSTORAGE para aplicaciones
+// 5. LOCALSTORAGE para aplicaciones
 // ============================================================
 let applications = JSON.parse(localStorage.getItem('indus_applications')) || [];
 
@@ -137,7 +215,7 @@ function saveApplications() {
 }
 
 // ============================================================
-// 4. FUNCIONES PRINCIPALES
+// 6. FUNCIONES PRINCIPALES (no tocar a menos que sepas lo que haces)
 // ============================================================
 function updateLanguage(lang) {
     currentLang = lang;
@@ -151,32 +229,28 @@ function updateLanguage(lang) {
                 if (span) span.innerText = translations[lang][key];
                 else el.innerText = translations[lang][key];
             } else if (el.tagName === 'OPTION') {
-                // handled manually via innerText mapping in updateSelectOptions
+                // handled in updateSelectOptions
             } else {
                 el.innerText = translations[lang][key];
             }
         }
     });
-    // Update selects manually
     updateSelectOptions();
     document.documentElement.lang = lang === 'ar' ? 'ar' : 'es';
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
     document.querySelectorAll('.lang-switch button').forEach(b => {
         b.classList.toggle('active', b.dataset.lang === lang);
     });
-    // Re-render jobs and dashboard if visible
     renderJobs();
 }
 
 function updateSelectOptions() {
-    // Education
     document.querySelectorAll('#education option').forEach(opt => {
         const key = opt.value === 'basico' ? 'edu_basic' : opt.value === 'media' ? 'edu_media' : 'edu_superior';
         if (translations[currentLang] && translations[currentLang][key]) {
             opt.innerText = translations[currentLang][key];
         }
     });
-    // Job select
     const jobSelect = document.getElementById('jobSelect');
     if (jobSelect) {
         const currentVal = jobSelect.value;
@@ -225,7 +299,6 @@ function renderJobs() {
         `;
         grid.appendChild(card);
     });
-    // Event listeners para los botones de aplicar
     document.querySelectorAll('.apply-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const jobId = parseInt(this.dataset.id);
@@ -233,9 +306,7 @@ function renderJobs() {
             if (job) {
                 const select = document.getElementById('jobSelect');
                 if (select) select.value = jobId;
-                // Ir a la sección de aplicación y step 1
                 document.getElementById('apply-section').scrollIntoView({ behavior: 'smooth' });
-                // Resetear steps al step 1
                 goToStep(1);
             }
         });
@@ -247,26 +318,20 @@ let currentStep = 1;
 
 function goToStep(step) {
     currentStep = step;
-    // Hide all steps
     document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
-    // Show target
     const target = document.getElementById('step' + step);
     if (target) target.classList.add('active');
-    // Update indicators
     document.querySelectorAll('.step-indicator').forEach((ind, idx) => {
         ind.classList.toggle('active', idx + 1 <= step);
     });
-    // Update line
     const fill = document.getElementById('stepLineFill');
     if (fill) fill.style.width = ((step - 1) / 2 * 100) + '%';
 }
 
 function setupForm() {
-    // Buttons Next
     document.querySelectorAll('[data-next]').forEach(btn => {
         btn.addEventListener('click', function() {
             const next = parseInt(this.dataset.next);
-            // Validate current step before moving
             if (currentStep === 1) {
                 const name = document.getElementById('fullName').value.trim();
                 const passport = document.getElementById('passport').value.trim();
@@ -286,7 +351,6 @@ function setupForm() {
             goToStep(next);
         });
     });
-    // Buttons Prev
     document.querySelectorAll('[data-prev]').forEach(btn => {
         btn.addEventListener('click', function() {
             const prev = parseInt(this.dataset.prev);
@@ -294,10 +358,8 @@ function setupForm() {
         });
     });
 
-    // Submit
     document.getElementById('applyForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        // Collect data
         const name = document.getElementById('fullName').value.trim();
         const passport = document.getElementById('passport').value.trim();
         const birth = document.getElementById('birthDate').value;
@@ -316,7 +378,6 @@ function setupForm() {
             return;
         }
 
-        // Crear aplicación
         const ref = 'APP-' + Date.now().toString().slice(-6);
         const newApp = {
             ref: ref,
@@ -332,22 +393,18 @@ function setupForm() {
             jobId: jobId,
             jobTitle: job ? (currentLang === 'ar' ? job.title_ar : job.title_es) : 'Unknown',
             motivation: motivation,
-            status: 'pending', // pending, accepted, rejected
+            status: 'pending',
             appliedAt: new Date().toISOString()
         };
         applications.push(newApp);
         saveApplications();
 
-        // Mostrar éxito
         document.getElementById('applySuccess').classList.remove('hidden');
         document.getElementById('refNumber').textContent = ref;
         document.getElementById('applyForm').reset();
-        // Actualizar stats
         updateStats();
 
-        // Ocultar mensaje después de 5 segundos (opcional)
         setTimeout(() => {
-            // scroll to top of apply section
             document.getElementById('apply-section').scrollIntoView({ behavior: 'smooth' });
         }, 500);
         showToast(translations[currentLang]['apply_success_title'] || 'Enviado!', 'success');
@@ -358,10 +415,8 @@ function setupForm() {
 function displayResult(appId) {
     const resultDiv = document.getElementById('resultBox');
     if (!resultDiv) return;
-    // Buscar primero en aplicaciones guardadas (localStorage)
     let app = applications.find(a => a.ref === appId);
     if (!app) {
-        // Buscar en demoApplications
         const demo = demoApplications[appId];
         if (demo) {
             app = { ...demo, ref: appId, jobTitle: demo.position || 'N/A' };
@@ -388,7 +443,7 @@ function displayResult(appId) {
 // ===== STATS =====
 function updateStats() {
     const total = applications.length + Object.keys(demoApplications).length;
-    const accepted = applications.filter(a => a.status === 'accepted').length + 1; // +1 por demo
+    const accepted = applications.filter(a => a.status === 'accepted').length + 1;
     const pending = applications.filter(a => a.status === 'pending').length + 1;
     const companies = new Set([...jobOffers.map(j => j.company), ...applications.map(a => a.jobTitle)]).size;
     document.getElementById('totalApps').textContent = total;
@@ -402,7 +457,6 @@ function renderAdminTable() {
     const tbody = document.getElementById('adminTableBody');
     if (!tbody) return;
     tbody.innerHTML = '';
-    // Combinar demo + aplicaciones guardadas
     const allApps = [...applications];
     Object.keys(demoApplications).forEach(key => {
         const d = demoApplications[key];
@@ -429,7 +483,6 @@ function renderAdminTable() {
 }
 
 function changeStatus(ref, newStatus) {
-    // Buscar en localStorage
     let app = applications.find(a => a.ref === ref);
     if (app) {
         app.status = newStatus;
@@ -439,7 +492,6 @@ function changeStatus(ref, newStatus) {
         updateStats();
         return;
     }
-    // Buscar en demo (solo lectura)
     if (demoApplications[ref]) {
         showToast('No se puede modificar una solicitud de demostración', 'error');
         return;
@@ -449,7 +501,7 @@ function changeStatus(ref, newStatus) {
 
 function login(username, password) {
     const cleanUser = username.toLowerCase().trim();
-    const user = users[cleanUser];
+    const user = employees[cleanUser];
     if (!user || user.password !== password) {
         const err = document.getElementById('loginError');
         if (err) { err.textContent = '❌ ' + (currentLang === 'ar' ? 'بيانات دخول خاطئة' : 'Credenciales incorrectas'); err.classList.remove('hidden'); }
@@ -459,7 +511,6 @@ function login(username, password) {
     document.getElementById('loginForm').style.display = 'none';
     document.getElementById('dashboardContent').classList.remove('hidden');
 
-    // Si es admin
     if (cleanUser === 'admin') {
         document.getElementById('adminPanel').classList.remove('hidden');
         document.getElementById('contractPanel').classList.add('hidden');
@@ -471,7 +522,6 @@ function login(username, password) {
         return true;
     }
 
-    // Usuario normal (reception_girl)
     document.getElementById('adminPanel').classList.add('hidden');
     document.getElementById('contractPanel').classList.remove('hidden');
     const c = user.contract;
@@ -530,16 +580,14 @@ function renderBarChart() {
 }
 
 // ============================================================
-// 5. EVENTOS
+// 7. EVENTOS
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ DOM listo.');
 
-    // Idioma
     document.getElementById('btn-es').addEventListener('click', () => updateLanguage('es'));
     document.getElementById('btn-ar').addEventListener('click', () => updateLanguage('ar'));
 
-    // Buscar
     document.getElementById('searchBtn').addEventListener('click', function() {
         const id = document.getElementById('applicationId').value.trim();
         if (!id) { showToast(currentLang === 'ar' ? 'أدخل رقم الطلب' : 'Introduce un número', 'error'); return; }
@@ -548,26 +596,17 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('applicationId').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') document.getElementById('searchBtn').click();
     });
-    document.querySelectorAll('.example-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.getElementById('applicationId').value = this.dataset.code;
-            document.getElementById('searchBtn').click();
-        });
-    });
 
-    // Scroll down
     document.querySelector('.scroll-down')?.addEventListener('click', () => {
         window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
     });
 
-    // Contacto
     document.getElementById('contactForm')?.addEventListener('submit', function(e) {
         e.preventDefault();
         showToast(currentLang === 'ar' ? 'تم الإرسال' : 'Mensaje enviado', 'success');
         this.reset();
     });
 
-    // Login
     document.getElementById('loginBtn').addEventListener('click', function() {
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value.trim();
@@ -581,29 +620,23 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.key === 'Enter') document.getElementById('loginBtn').click();
     });
 
-    // Logout
     document.getElementById('logoutBtn').addEventListener('click', logout);
 
-    // Dashboard link scroll
     document.getElementById('dashboardLink').addEventListener('click', function(e) {
         e.preventDefault();
         document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
     });
 
-    // Mobile menu
     document.getElementById('mobileMenu').addEventListener('click', function() {
         document.getElementById('navLinks').classList.toggle('show');
     });
 
-    // Inicializar
     updateLanguage('es');
     renderJobs();
     setupForm();
     updateStats();
-    // Inicializar bar chart si está visible (por si el login ya está abierto)
     setTimeout(() => renderBarChart(), 300);
 
-    // Función global para changeStatus (usada en onclick de admin table)
     window.changeStatus = changeStatus;
 
     console.log('🎯 IndusRecruit Pro listo.');
