@@ -1,264 +1,324 @@
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Portal oficial para trabajadores marroquíes - Consulta el estado de tu contrato agrícola en España">
-    <meta name="keywords" content="contratos agrícolas, España, Marruecos, trabajo temporal">
-    <meta name="author" content="AgroEmpleo España">
-    <title>AgroPortal España | Portal de Contratos Agrícolas</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IndusRecruit Pro | Portal Industrial</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="logo">
-                <i class="fas fa-leaf"></i>
-                <span>Agro<span class="highlight">Portal</span></span>
+                <i class="fas fa-industry"></i>
+                <span>Indus<span class="highlight">Recruit</span></span>
             </div>
-            <div class="nav-links">
+            <div class="nav-links" id="navLinks">
                 <a href="#home" class="nav-link active"><i class="fas fa-home"></i> <span data-key="nav_home">Inicio</span></a>
-                <a href="#info" class="nav-link"><i class="fas fa-info-circle"></i> <span data-key="nav_info">Información</span></a>
-                <a href="#gallery" class="nav-link"><i class="fas fa-images"></i> <span data-key="nav_gallery">Galería</span></a>
+                <a href="#jobs" class="nav-link"><i class="fas fa-briefcase"></i> <span data-key="nav_jobs">Ofertas</span></a>
+                <a href="#apply-section" class="nav-link"><i class="fas fa-paper-plane"></i> <span data-key="nav_apply">Postular</span></a>
+                <a href="#dashboard" class="nav-link" id="dashboardLink"><i class="fas fa-user-cog"></i> <span data-key="nav_dashboard">Mi cuenta</span></a>
                 <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> <span data-key="nav_contact">Contacto</span></a>
             </div>
             <div class="lang-switch">
                 <button id="btn-es" class="active" data-lang="es">🇪🇸 ES</button>
                 <button id="btn-ar" data-lang="ar">🇲🇦 AR</button>
             </div>
-            <div class="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </div>
+            <div class="mobile-menu" id="mobileMenu"><i class="fas fa-bars"></i></div>
         </div>
     </nav>
 
-    <!-- Hero Section مع تأثير بارالاكس -->
+    <!-- ===== HERO ===== -->
     <section class="hero" id="home">
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="floating-badge">
-                <i class="fas fa-check-circle"></i> 
-                <span data-key="badge">+500 Contratos Gestionados 2026</span>
+                <i class="fas fa-check-circle"></i>
+                <span data-key="badge">+500 Contratos activos 2026</span>
             </div>
-            <h1 data-key="hero_title">Trabajo agrícola <span class="gradient-text">en España</span></h1>
-            <p data-key="hero_sub">Bienvenido al portal oficial para trabajadores marroquíes. Consulta el estado de tu contrato de forma rápida y segura.</p>
-            
-            <!-- بطاقة البحث المحسنة -->
+            <h1 data-key="hero_title">Empleo industrial <span class="gradient-text">en España</span></h1>
+            <p data-key="hero_sub">Plataforma oficial para trabajadores marroquíes. Busca ofertas, postula y sigue tu contrato.</p>
             <div class="search-card">
-                <h3><i class="fas fa-search"></i> <span data-key="search_title">Consultar mi contrato</span></h3>
+                <h3><i class="fas fa-search"></i> <span data-key="search_title">Consultar solicitud</span></h3>
                 <div class="input-group">
                     <i class="fas fa-id-card input-icon"></i>
-                    <input type="text" id="contractNumber" placeholder="Ej: MAR-ESP-2025-AK" data-key="input_placeholder">
-                    <button id="searchBtn" data-key="search_btn">
-                        <i class="fas fa-arrow-right"></i> <span>Buscar</span>
-                    </button>
+                    <input type="text" id="applicationId" placeholder="Ej: ESP-2026-001" data-key="input_placeholder" />
+                    <button id="searchBtn"><i class="fas fa-arrow-right"></i> <span data-key="search_btn">Buscar</span></button>
                 </div>
                 <div id="resultBox" class="result-box hidden"></div>
                 <div class="search-examples">
-                    <small data-key="examples_title">📋 Ejemplos para probar:</small>
+                    <small data-key="examples_title">📋 Ejemplos:</small>
                     <div class="example-buttons">
-                        
+                        <button class="example-btn" data-code="ESP-2026-001">ESP-2026-001</button>
+                        <button class="example-btn" data-code="ESP-2026-002">ESP-2026-002</button>
+                        <button class="example-btn" data-code="ESP-2026-003">ESP-2026-003</button>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <!-- زر التمرير للأسفل -->
-        <div class="scroll-down">
-            <i class="fas fa-chevron-down"></i>
-        </div>
+        <div class="scroll-down"><i class="fas fa-chevron-down"></i></div>
     </section>
 
-    <!-- إحصائيات سريعة -->
-    <section class="stats-section">
+    <!-- ===== STATS (Dinámicos) ===== -->
+    <section class="stats-section" id="statsSection">
         <div class="container">
-            <div class="stat-card">
-                <i class="fas fa-check-circle"></i>
-                <div class="stat-info">
-                    <h3 class="counter" data-target="156">0</h3>
-                    <p data-key="stat_accepted">Contratos Aceptados</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-clock"></i>
-                <div class="stat-info">
-                    <h3 class="counter" data-target="23">0</h3>
-                    <p data-key="stat_pending">En Revisión</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-building"></i>
-                <div class="stat-info">
-                    <h3 class="counter" data-target="12">0</h3>
-                    <p data-key="stat_companies">Empresas Asociadas</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-calendar-week"></i>
-                <div class="stat-info">
-                    <h3 class="counter" data-target="45">0</h3>
-                    <p data-key="stat_days">Días de Respuesta</p>
-                </div>
-            </div>
+            <div class="stat-card"><i class="fas fa-file-signature"></i><div class="stat-info"><h3 class="counter" id="totalApps">0</h3><p data-key="stat_applied">Solicitudes</p></div></div>
+            <div class="stat-card"><i class="fas fa-check-circle"></i><div class="stat-info"><h3 id="totalAccepted">0</h3><p data-key="stat_accepted">Contratos</p></div></div>
+            <div class="stat-card"><i class="fas fa-building"></i><div class="stat-info"><h3 id="totalCompanies">0</h3><p data-key="stat_companies">Empresas</p></div></div>
+            <div class="stat-card"><i class="fas fa-clock"></i><div class="stat-info"><h3 id="totalPending">0</h3><p data-key="stat_pending">Pendientes</p></div></div>
         </div>
     </section>
 
-    <!-- بطاقات المعلومات المحسنة -->
-    <section class="info-cards" id="info">
+    <!-- ===== OFERTAS DE TRABAJO (NUEVO) ===== -->
+    <section class="jobs-section" id="jobs">
         <div class="container">
             <div class="section-header">
-                <h2 data-key="benefits_title">🌱 ¿Por qué trabajar en el sector agrícola español?</h2>
-                <p data-key="benefits_subtitle">Oportunidades laborales con garantías y derechos para trabajadores marroquíes</p>
+                <h2 data-key="jobs_title">💼 Ofertas de trabajo activas</h2>
+                <p data-key="jobs_sub">Selecciona una oferta y postula ahora mismo</p>
             </div>
-            <div class="card-grid">
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-hand-holding-heart"></i>
-                    </div>
-                    <h3 data-key="benefit_1_title">Contratos justos</h3>
-                    <p data-key="benefit_1_desc">Salario conforme a convenio, seguridad social y alojamiento digno garantizado.</p>
+            <div class="jobs-grid" id="jobsGrid">
+                <!-- Se genera dinámicamente con JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FORMULARIO DE POSTULACIÓN (MULTI-STEP) ===== -->
+    <section class="apply-section" id="apply-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-key="apply_title">📝 Postular a una oferta</h2>
+                <p data-key="apply_sub">Completa los 3 pasos para enviar tu solicitud</p>
+            </div>
+            <div class="apply-wrapper">
+                <div class="steps-progress">
+                    <div class="step-indicator active" id="step1Indicator"><span>1</span> <span data-key="step_personal">Personal</span></div>
+                    <div class="step-indicator" id="step2Indicator"><span>2</span> <span data-key="step_professional">Profesional</span></div>
+                    <div class="step-indicator" id="step3Indicator"><span>3</span> <span data-key="step_documents">Documentos</span></div>
                 </div>
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-chart-line"></i>
+                <div class="step-line"><div class="step-line-fill" id="stepLineFill"></div></div>
+
+                <form id="applyForm" class="apply-form">
+                    <!-- STEP 1 -->
+                    <div class="step-content active" id="step1">
+                        <h3 data-key="step_personal_title">📌 Datos personales</h3>
+                        <div class="form-row">
+                            <div class="form-group"><label data-key="label_name">Nombre completo</label><input type="text" id="fullName" required placeholder="Ej: Ahmed Benjelloun" /></div>
+                            <div class="form-group"><label data-key="label_passport">Nº Pasaporte</label><input type="text" id="passport" required placeholder="AA123456" /></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label data-key="label_birth">Fecha nacimiento</label><input type="date" id="birthDate" required /></div>
+                            <div class="form-group"><label data-key="label_phone">Teléfono</label><input type="tel" id="phone" required placeholder="0612345678" /></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label data-key="label_email">Email</label><input type="email" id="email" required placeholder="ahmed@mail.com" /></div>
+                            <div class="form-group"><label data-key="label_city">Ciudad (Marruecos)</label><input type="text" id="city" required placeholder="Casablanca" /></div>
+                        </div>
+                        <button type="button" class="step-btn" data-next="2" data-key="next_btn">Siguiente →</button>
                     </div>
-                    <h3 data-key="benefit_2_title">Desarrollo profesional</h3>
-                    <p data-key="benefit_2_desc">Formación continua, certificaciones y oportunidades de crecimiento laboral.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-users"></i>
+
+                    <!-- STEP 2 -->
+                    <div class="step-content" id="step2">
+                        <h3 data-key="step_professional_title">💼 Experiencia y habilidades</h3>
+                        <div class="form-row">
+                            <div class="form-group"><label data-key="label_experience">Años de experiencia</label><input type="number" id="experience" min="0" max="40" placeholder="0" /></div>
+                            <div class="form-group"><label data-key="label_education">Nivel educativo</label>
+                                <select id="education">
+                                    <option value="basico" data-key="edu_basic">Básico</option>
+                                    <option value="media" data-key="edu_media">Secundaria</option>
+                                    <option value="superior" data-key="edu_superior">Superior / Universidad</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label data-key="label_languages">Idiomas (marca los que hablas)</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" value="es" class="langCheck" /> Español</label>
+                                <label><input type="checkbox" value="fr" class="langCheck" /> Francés</label>
+                                <label><input type="checkbox" value="en" class="langCheck" /> Inglés</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label data-key="label_job_select">Oferta a la que postulas</label>
+                            <select id="jobSelect" required>
+                                <option value="">-- Selecciona una oferta --</option>
+                            </select>
+                        </div>
+                        <div style="display:flex; gap:1rem; margin-top:1.5rem;">
+                            <button type="button" class="step-btn prev" data-prev="1" data-key="prev_btn">← Anterior</button>
+                            <button type="button" class="step-btn" data-next="3" data-key="next_btn">Siguiente →</button>
+                        </div>
                     </div>
-                    <h3 data-key="benefit_3_title">Entorno multicultural</h3>
-                    <p data-key="benefit_3_desc">Equipo diverso, respeto, apoyo mutuo y acompañamiento lingüístico.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-shield-alt"></i>
+
+                    <!-- STEP 3 -->
+                    <div class="step-content" id="step3">
+                        <h3 data-key="step_documents_title">📎 Documentos y motivación</h3>
+                        <div class="form-group">
+                            <label data-key="label_cv">Sube tu CV (PDF, máximo 2MB) - Simulación</label>
+                            <input type="file" id="cvFile" accept=".pdf,.doc,.docx" />
+                            <small style="opacity:0.5;">* No se sube realmente, solo simulamos para demo</small>
+                        </div>
+                        <div class="form-group">
+                            <label data-key="label_motivation">Carta de motivación</label>
+                            <textarea id="motivation" rows="4" placeholder="Cuéntanos por qué quieres trabajar en España..."></textarea>
+                        </div>
+                        <div style="display:flex; gap:1rem; margin-top:1.5rem;">
+                            <button type="button" class="step-btn prev" data-prev="2" data-key="prev_btn">← Anterior</button>
+                            <button type="submit" class="step-btn submit-btn" data-key="submit_final">📨 Enviar solicitud</button>
+                        </div>
                     </div>
-                    <h3 data-key="benefit_4_title">Asistencia legal</h3>
-                    <p data-key="benefit_4_desc">Asesoramiento jurídico gratuito y defensa de tus derechos laborales.</p>
+                </form>
+                <div id="applySuccess" class="success-box hidden">
+                    <i class="fas fa-check-circle" style="font-size:3rem; color: #2ecc71;"></i>
+                    <h3 data-key="apply_success_title">¡Solicitud enviada con éxito!</h3>
+                    <p data-key="apply_success_msg">Hemos recibido tus datos. Recibirás un correo de confirmación en 24h.</p>
+                    <p><strong data-key="apply_ref">Tu número de referencia:</strong> <span id="refNumber">---</span></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- المعرض المحسن -->
+    <!-- ===== LOGIN / DASHBOARD ===== -->
+    <section class="login-section" id="dashboard">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-key="login_title">🔐 Acceso a tu contrato</h2>
+                <p data-key="login_sub">Introduce tus credenciales para ver todos los detalles</p>
+            </div>
+            <div class="login-dashboard-wrapper">
+                <div id="loginForm" class="login-card">
+                    <div class="login-icon"><i class="fas fa-user-lock"></i></div>
+                    <div class="input-group-login">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" placeholder="Usuario" />
+                    </div>
+                    <div class="input-group-login">
+                        <i class="fas fa-key"></i>
+                        <input type="password" id="password" placeholder="Contraseña" />
+                    </div>
+                    <button id="loginBtn" class="btn-primary"><i class="fas fa-sign-in-alt"></i> <span data-key="login_btn">Iniciar sesión</span></button>
+                    <div id="loginError" class="error-msg hidden"></div>
+                    <p class="demo-hint" data-key="demo_hint">👥 Prueba: reception_girl / 1234  |  admin / admin</p>
+                </div>
+
+                <div id="dashboardContent" class="dashboard-card hidden">
+                    <div class="dashboard-header">
+                        <div class="user-profile">
+                            <img id="userAvatar" src="https://i.pravatar.cc/150?img=5" alt="Avatar" />
+                            <div>
+                                <h2 id="userFullName">Nombre</h2>
+                                <p id="userPosition">Cargo</p>
+                            </div>
+                        </div>
+                        <button id="logoutBtn" class="btn-secondary"><i class="fas fa-sign-out-alt"></i> Salir</button>
+                    </div>
+
+                    <!-- Vista de ADMIN -->
+                    <div id="adminPanel" class="hidden">
+                        <h3>📊 Panel de Administración - Todas las solicitudes</h3>
+                        <div id="adminTableContainer" style="overflow-x:auto; margin-top:1rem;">
+                            <table id="adminTable" style="width:100%; border-collapse:collapse;">
+                                <thead style="background:rgba(230,126,34,0.2);">
+                                    <tr>
+                                        <th>Ref</th>
+                                        <th data-key="label_name">Nombre</th>
+                                        <th data-key="label_job_select">Oferta</th>
+                                        <th data-key="stat_status">Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Vista de CONTRATO para reception_girl -->
+                    <div id="contractPanel">
+                        <div class="contract-details">
+                            <h3>📄 Detalles de tu contrato</h3>
+                            <div class="contract-grid">
+                                <div class="contract-item"><span data-key="contract_id">Nº contrato:</span> <strong id="contractId">---</strong></div>
+                                <div class="contract-item"><span data-key="contract_employer">Empresa:</span> <strong id="contractEmployer">---</strong></div>
+                                <div class="contract-item"><span data-key="contract_location">Ubicación:</span> <strong id="contractLocation">---</strong></div>
+                                <div class="contract-item"><span data-key="contract_start">Inicio:</span> <strong id="contractStart">---</strong></div>
+                                <div class="contract-item"><span data-key="contract_end">Fin:</span> <strong id="contractEnd">---</strong></div>
+                                <div class="contract-item"><span data-key="contract_salary">Salario:</span> <strong id="contractSalary">---</strong></div>
+                                <div class="contract-item"><span data-key="contract_hours">Horas:</span> <strong id="contractHours">---</strong></div>
+                                <div class="contract-item"><span data-key="contract_benefits">Beneficios:</span> <strong id="contractBenefits">---</strong></div>
+                                <div class="contract-item"><span data-key="contract_contact">Contacto:</span> <strong id="contractContact">---</strong></div>
+                            </div>
+                            <div class="contract-stamp">
+                                <i class="fas fa-certificate"></i> Contrato validado por el Ministerio de Trabajo
+                            </div>
+                        </div>
+                        <div class="dashboard-charts">
+                            <h3>📊 Estadísticas del sector</h3>
+                            <div class="chart-container">
+                                <div class="pie-chart" id="pieChart"></div>
+                                <div class="bar-chart" id="barChart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GALLERY ===== -->
     <section class="gallery" id="gallery">
         <div class="container">
             <div class="section-header">
-                <h2 data-key="gallery_title">📸 Jornadas de trabajo y vida en España</h2>
-                <p data-key="gallery_subtitle">Conoce el día a día de nuestros trabajadores en las mejores condiciones</p>
+                <h2 data-key="gallery_title">📸 Galería industrial</h2>
+                <p data-key="gallery_subtitle">Imágenes de los centros de trabajo y alojamientos</p>
             </div>
             <div class="grid-gallery">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?w=600&auto=format" alt="Campo de fresas" loading="lazy">
-                    <div class="overlay">
-                        <span>Cosecha de fresas</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1620101176614-cd8b3c3f8466?w=600&auto=format" alt="Trabajadores" loading="lazy">
-                    <div class="overlay">
-                        <span>Equipo de trabajo</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=600&auto=format" alt="Vivienda" loading="lazy">
-                    <div class="overlay">
-                        <span>Alojamiento digno</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1532117188753-5b79c1a40fa0?w=600&auto=format" alt="Campo de olivos" loading="lazy">
-                    <div class="overlay">
-                        <span>Campiña andaluza</span>
-                    </div>
-                </div>
+                <div class="gallery-item"><img src="https://picsum.photos/seed/agro1/600/400" alt="Agricultura" loading="lazy" /><div class="overlay"><span>Agricultura</span></div></div>
+                <div class="gallery-item"><img src="https://picsum.photos/seed/agro2/600/400" alt="Construcción" loading="lazy" /><div class="overlay"><span>Construcción</span></div></div>
+                <div class="gallery-item"><img src="https://picsum.photos/seed/agro3/600/400" alt="Hostelería" loading="lazy" /><div class="overlay"><span>Hostelería</span></div></div>
+                <div class="gallery-item"><img src="https://picsum.photos/seed/agro4/600/400" alt="Tecnología" loading="lazy" /><div class="overlay"><span>Tecnología</span></div></div>
             </div>
         </div>
     </section>
 
-    <!-- نموذج التواصل -->
+    <!-- ===== CONTACT ===== -->
     <section class="contact" id="contact">
         <div class="container">
             <div class="contact-grid">
                 <div class="contact-info">
                     <h2 data-key="contact_title">¿Necesitas ayuda?</h2>
-                    <p data-key="contact_desc">Nuestro equipo de soporte está disponible para resolver tus dudas</p>
+                    <p data-key="contact_desc">Soporte 24/7</p>
                     <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-phone-alt"></i>
-                            <div>
-                                <strong>Teléfono 24/7</strong>
-                                <p>+34 900 123 456</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <strong>Email</strong>
-                                <p>contratos@agroempleo.es</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <strong>Oficina en Marruecos</strong>
-                                <p>Casablanca, Maroc</p>
-                            </div>
-                        </div>
+                        <div class="contact-item"><i class="fas fa-phone-alt"></i><div><strong>Teléfono</strong><p>+34 900 123 456</p></div></div>
+                        <div class="contact-item"><i class="fas fa-envelope"></i><div><strong>Email</strong><p>contratos@indusrecruit.es</p></div></div>
+                        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><div><strong>Oficina</strong><p>Casablanca, Maroc</p></div></div>
                     </div>
                 </div>
                 <form class="contact-form" id="contactForm">
-                    <input type="text" placeholder="Tu nombre" required>
-                    <input type="email" placeholder="Tu email" required>
-                    <input type="text" placeholder="Número de contrato (opcional)">
-                    <textarea rows="4" placeholder="Tu mensaje" required></textarea>
-                    <button type="submit"><i class="fas fa-paper-plane"></i> Enviar mensaje</button>
+                    <input type="text" placeholder="Tu nombre" required />
+                    <input type="email" placeholder="Tu email" required />
+                    <input type="text" placeholder="Nº contrato (opcional)" />
+                    <textarea rows="4" placeholder="Mensaje" required></textarea>
+                    <button type="submit"><i class="fas fa-paper-plane"></i> Enviar</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer محسن -->
+    <!-- ===== FOOTER ===== -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h3><i class="fas fa-leaf"></i> AgroPortal</h3>
-                    <p data-key="footer_desc">Portal oficial de gestión de contratos agrícolas entre España y Marruecos</p>
-                </div>
-                <div class="footer-section">
-                    <h4 data-key="footer_links">Enlaces rápidos</h4>
-                    <ul>
-                        <li><a href="#home">Inicio</a></li>
-                        <li><a href="#info">Información</a></li>
-                        <li><a href="#gallery">Galería</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Síguenos</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
+                <div class="footer-section"><h3><i class="fas fa-industry"></i> IndusRecruit</h3><p data-key="footer_desc">Portal industrial de empleo</p></div>
+                <div class="footer-section"><h4 data-key="footer_links">Enlaces</h4><ul><li><a href="#home">Inicio</a></li><li><a href="#jobs">Ofertas</a></li><li><a href="#apply-section">Postular</a></li></ul></div>
+                <div class="footer-section"><h4>Síguenos</h4><div class="social-links"><a href="#"><i class="fab fa-facebook"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin"></i></a></div></div>
             </div>
-            <div class="footer-bottom">
-                <p data-key="footer_text">© 2025 Portal de Contratos Agrícolas España-Marruecos. Todos los derechos reservados.</p>
-                <p data-key="footer_support">📞 Atención al trabajador: +34 900 123 456 | ✉️ contratos@agroempleo.es</p>
-            </div>
+            <div class="footer-bottom"><p data-key="footer_text">© 2026 IndusRecruit. Todos los derechos reservados.</p><p data-key="footer_support">📞 +34 900 123 456 | ✉️ contratos@indusrecruit.es</p></div>
         </div>
     </footer>
 
-    <!-- Toast Notifications -->
     <div id="toast" class="toast hidden"></div>
 
     <script src="script.js"></script>
