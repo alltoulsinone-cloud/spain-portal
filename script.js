@@ -192,4 +192,494 @@ const jobOffers = [
         title_es: "Recepcionista de hotel", 
         title_ar: "موظفة استقبال فندق", 
         company: "Hotel Bahía del Sol", 
-        location
+        location: "Benalmádena, Málaga", 
+        salary: "1.450€", 
+        duration: "Temporada 6 meses", 
+        sector: "hosteleria" 
+    },
+    { 
+        id: 3, 
+        title_es: "Ayudante de construcción", 
+        title_ar: "مساعد بناء", 
+        company: "Construcciones Metálicas S.A.", 
+        location: "Madrid", 
+        salary: "1.600€", 
+        duration: "1 año", 
+        sector: "construccion" 
+    },
+    { 
+        id: 4, 
+        title_es: "Desarrollador web junior", 
+        title_ar: "مطور ويب مبتدئ", 
+        company: "TechSolutions", 
+        location: "Barcelona", 
+        salary: "2.100€", 
+        duration: "Indefinido", 
+        sector: "tecnologia" 
+    },
+    { 
+        id: 5, 
+        title_es: "Operario de logística", 
+        title_ar: "عامل لوجستيك", 
+        company: "LogiStar", 
+        location: "Valencia", 
+        salary: "1.350€", 
+        duration: "9 meses", 
+        sector: "logistica" 
+    }
+];
+
+// ============================================================
+// 4. DATOS DE DEMOSTRACIÓN (para búsqueda - puedes vaciarlos)
+// ============================================================
+const demoApplications = {
+    "HM-MAR-2026-099": { status: "accepted", name_es: "Hajar Elmakhfi", name_ar: "هاجر المخفي", id_number: "DA108522", position: "Agente de recepción", location: "Azrou, Ifrane", start_date: "14.01.2027" },
+    "ESP-2026-002": { status: "pending", name_es: "Fatima Zahra", name_ar: "فاطمة الزهراء", id_number: "FZ345678", position: "Agricultora", location: "Murcia" },
+    "ESP-2026-003": { status: "rejected", name_es: "Youssef El Mansouri", name_ar: "يوسف المنصوري", id_number: "YM901234" }
+};
+
+// ============================================================
+// 5. LOCALSTORAGE para aplicaciones
+// ============================================================
+let applications = JSON.parse(localStorage.getItem('indus_applications')) || [];
+
+function saveApplications() {
+    localStorage.setItem('indus_applications', JSON.stringify(applications));
+}
+
+// ============================================================
+// 6. FUNCIONES PRINCIPALES (no tocar a menos que sepas lo que haces)
+// ============================================================
+function updateLanguage(lang) {
+    currentLang = lang;
+    document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (translations[lang] && translations[lang][key]) {
+            if (el.tagName === 'INPUT' && el.getAttribute('data-key') === 'input_placeholder') {
+                el.placeholder = translations[lang][key];
+            } else if (el.tagName === 'BUTTON' && (key === 'search_btn' || key === 'login_btn' || key === 'submit_final' || key === 'next_btn' || key === 'prev_btn')) {
+                const span = el.querySelector('span');
+                if (span) span.innerText = translations[lang][key];
+                else el.innerText = translations[lang][key];
+            } else if (el.tagName === 'OPTION') {
+                // handled in updateSelectOptions
+            } else {
+                el.innerText = translations[lang][key];
+            }
+        }
+    });
+    updateSelectOptions();
+    document.documentElement.lang = lang === 'ar' ? 'ar' : 'es';
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.querySelectorAll('.lang-switch button').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    renderJobs();
+}
+
+function updateSelectOptions() {
+    document.querySelectorAll('#education option').forEach(opt => {
+        const key = opt.value === 'basico' ? 'edu_basic' : opt.value === 'media' ? 'edu_media' : 'edu_superior';
+        if (translations[currentLang] && translations[currentLang][key]) {
+            opt.innerText = translations[currentLang][key];
+        }
+    });
+    const jobSelect = document.getElementById('jobSelect');
+    if (jobSelect) {
+        const currentVal = jobSelect.value;
+        jobSelect.innerHTML = `<option value="">-- ${translations[currentLang]['label_job_select'] || 'Selecciona'} --</option>`;
+        jobOffers.forEach(job => {
+            const opt = document.createElement('option');
+            opt.value = job.id;
+            const title = currentLang === 'ar' ? job.title_ar : job.title_es;
+            opt.textContent = `${title} - ${job.company}`;
+            jobSelect.appendChild(opt);
+        });
+        jobSelect.value = currentVal;
+    }
+}
+
+function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.remove('hidden');
+    const colors = { success: '#2ecc71', error: '#e74c3c', info: '#f39c12' };
+    t.style.background = colors[type] || colors.success;
+    t.style.color = '#0a0f1a';
+    setTimeout(() => t.classList.add('hidden'), 4000);
+}
+
+// ===== JOBS =====
+function renderJobs() {
+    const grid = document.getElementById('jobsGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    jobOffers.forEach(job => {
+        const title = currentLang === 'ar' ? job.title_ar : job.title_es;
+        const card = document.createElement('div');
+        card.className = 'job-card';
+        card.innerHTML = `
+            <div class="badge">${job.sector}</div>
+            <h3>${title}</h3>
+            <div class="company">${job.company}</div>
+            <div class="details">
+                <span><i class="fas fa-map-marker-alt"></i> ${job.location}</span>
+                <span><i class="fas fa-euro-sign"></i> ${job.salary}</span>
+                <span><i class="fas fa-clock"></i> ${job.duration}</span>
+            </div>
+            <button class="apply-btn" data-id="${job.id}"><i class="fas fa-paper-plane"></i> ${translations[currentLang]['nav_apply'] || 'Postular'}</button>
+        `;
+        grid.appendChild(card);
+    });
+    document.querySelectorAll('.apply-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const jobId = parseInt(this.dataset.id);
+            const job = jobOffers.find(j => j.id === jobId);
+            if (job) {
+                const select = document.getElementById('jobSelect');
+                if (select) select.value = jobId;
+                document.getElementById('apply-section').scrollIntoView({ behavior: 'smooth' });
+                goToStep(1);
+            }
+        });
+    });
+}
+
+// ===== MULTI-STEP FORM =====
+let currentStep = 1;
+
+function goToStep(step) {
+    currentStep = step;
+    document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+    const target = document.getElementById('step' + step);
+    if (target) target.classList.add('active');
+    document.querySelectorAll('.step-indicator').forEach((ind, idx) => {
+        ind.classList.toggle('active', idx + 1 <= step);
+    });
+    const fill = document.getElementById('stepLineFill');
+    if (fill) fill.style.width = ((step - 1) / 2 * 100) + '%';
+}
+
+function setupForm() {
+    document.querySelectorAll('[data-next]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const next = parseInt(this.dataset.next);
+            if (currentStep === 1) {
+                const name = document.getElementById('fullName').value.trim();
+                const passport = document.getElementById('passport').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                if (!name || !passport || !phone) {
+                    showToast(translations[currentLang]['label_name'] + ' y ' + translations[currentLang]['label_phone'] + ' son obligatorios', 'error');
+                    return;
+                }
+            }
+            if (currentStep === 2) {
+                const job = document.getElementById('jobSelect').value;
+                if (!job) {
+                    showToast(translations[currentLang]['label_job_select'] + ' es obligatorio', 'error');
+                    return;
+                }
+            }
+            goToStep(next);
+        });
+    });
+    document.querySelectorAll('[data-prev]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const prev = parseInt(this.dataset.prev);
+            goToStep(prev);
+        });
+    });
+
+    document.getElementById('applyForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('fullName').value.trim();
+        const passport = document.getElementById('passport').value.trim();
+        const birth = document.getElementById('birthDate').value;
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const city = document.getElementById('city').value.trim();
+        const experience = document.getElementById('experience').value || 0;
+        const education = document.getElementById('education').value;
+        const langs = [...document.querySelectorAll('.langCheck:checked')].map(el => el.value);
+        const jobId = parseInt(document.getElementById('jobSelect').value);
+        const job = jobOffers.find(j => j.id === jobId);
+        const motivation = document.getElementById('motivation').value.trim();
+
+        if (!name || !passport || !phone || !jobId) {
+            showToast('Faltan datos obligatorios', 'error');
+            return;
+        }
+
+        const ref = 'APP-' + Date.now().toString().slice(-6);
+        const newApp = {
+            ref: ref,
+            name: name,
+            passport: passport,
+            birth: birth,
+            phone: phone,
+            email: email,
+            city: city,
+            experience: experience,
+            education: education,
+            languages: langs,
+            jobId: jobId,
+            jobTitle: job ? (currentLang === 'ar' ? job.title_ar : job.title_es) : 'Unknown',
+            motivation: motivation,
+            status: 'pending',
+            appliedAt: new Date().toISOString()
+        };
+        applications.push(newApp);
+        saveApplications();
+
+        document.getElementById('applySuccess').classList.remove('hidden');
+        document.getElementById('refNumber').textContent = ref;
+        document.getElementById('applyForm').reset();
+        updateStats();
+
+        setTimeout(() => {
+            document.getElementById('apply-section').scrollIntoView({ behavior: 'smooth' });
+        }, 500);
+        showToast(translations[currentLang]['apply_success_title'] || 'Enviado!', 'success');
+    });
+}
+
+// ===== SEARCH =====
+function displayResult(appId) {
+    const resultDiv = document.getElementById('resultBox');
+    if (!resultDiv) return;
+    let app = applications.find(a => a.ref === appId);
+    if (!app) {
+        const demo = demoApplications[appId];
+        if (demo) {
+            app = { ...demo, ref: appId, jobTitle: demo.position || 'N/A' };
+        }
+    }
+    if (!app) {
+        resultDiv.innerHTML = `<p>${translations[currentLang].not_found}</p>`;
+        resultDiv.className = 'result-box';
+        showToast(translations[currentLang].not_found, 'error');
+        return;
+    }
+    const statusText = translations[currentLang]['status_' + app.status] || app.status;
+    const msg = translations[currentLang][app.status + '_msg'] || '';
+    const name = app.name_es || app.name || 'Unknown';
+    let details = `<strong>📌 Ref:</strong> ${app.ref}`;
+    if (app.jobTitle) details += `<br><strong>${currentLang==='ar'?'المنصب':'Puesto'}:</strong> ${app.jobTitle}`;
+    if (app.location) details += `<br><strong>${currentLang==='ar'?'الموقع':'Ubicación'}:</strong> ${app.location}`;
+    if (app.start_date) details += `<br><strong>${currentLang==='ar'?'تاريخ البدء':'Fecha inicio'}:</strong> ${app.start_date}`;
+    resultDiv.innerHTML = `<h3>${name}</h3><p><strong>${statusText}</strong></p><p>${msg}</p><div style="margin-top:12px;border-top:1px solid rgba(255,255,255,0.1);padding-top:12px;">${details}</div>`;
+    resultDiv.className = `result-box ${app.status}`;
+    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ===== STATS =====
+function updateStats() {
+    const total = applications.length + Object.keys(demoApplications).length;
+    const accepted = applications.filter(a => a.status === 'accepted').length + 1;
+    const pending = applications.filter(a => a.status === 'pending').length + 1;
+    const companies = new Set([...jobOffers.map(j => j.company), ...applications.map(a => a.jobTitle)]).size;
+    document.getElementById('totalApps').textContent = total;
+    document.getElementById('totalAccepted').textContent = accepted;
+    document.getElementById('totalPending').textContent = pending;
+    document.getElementById('totalCompanies').textContent = companies || 25;
+}
+
+// ===== DASHBOARD / LOGIN =====
+function renderAdminTable() {
+    const tbody = document.getElementById('adminTableBody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    const allApps = [...applications];
+    Object.keys(demoApplications).forEach(key => {
+        const d = demoApplications[key];
+        allApps.push({ ref: key, name_es: d.name_es, name_ar: d.name_ar, jobTitle: d.position || 'N/A', status: d.status });
+    });
+    allApps.forEach(app => {
+        const tr = document.createElement('tr');
+        const name = currentLang === 'ar' ? app.name_ar || app.name : app.name_es || app.name;
+        const statusClass = 'status-' + app.status;
+        const statusText = translations[currentLang]['status_' + app.status] || app.status;
+        tr.innerHTML = `
+            <td><strong>${app.ref}</strong></td>
+            <td>${name || 'N/A'}</td>
+            <td>${app.jobTitle || 'N/A'}</td>
+            <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+            <td>
+                <button class="action-btn" onclick="changeStatus('${app.ref}', 'accepted')">✅</button>
+                <button class="action-btn" onclick="changeStatus('${app.ref}', 'pending')">⏳</button>
+                <button class="action-btn" onclick="changeStatus('${app.ref}', 'rejected')">❌</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function changeStatus(ref, newStatus) {
+    let app = applications.find(a => a.ref === ref);
+    if (app) {
+        app.status = newStatus;
+        saveApplications();
+        showToast(`Estado cambiado a ${newStatus}`, 'info');
+        renderAdminTable();
+        updateStats();
+        return;
+    }
+    if (demoApplications[ref]) {
+        showToast('No se puede modificar una solicitud de demostración', 'error');
+        return;
+    }
+    showToast('Solicitud no encontrada', 'error');
+}
+
+function login(username, password) {
+    const cleanUser = username.toLowerCase().trim();
+    const user = employees[cleanUser];
+    if (!user || user.password !== password) {
+        const err = document.getElementById('loginError');
+        if (err) { err.textContent = '❌ ' + (currentLang === 'ar' ? 'بيانات دخول خاطئة' : 'Credenciales incorrectas'); err.classList.remove('hidden'); }
+        return false;
+    }
+    document.getElementById('loginError').classList.add('hidden');
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('dashboardContent').classList.remove('hidden');
+
+    if (cleanUser === 'admin') {
+        document.getElementById('adminPanel').classList.remove('hidden');
+        document.getElementById('contractPanel').classList.add('hidden');
+        renderAdminTable();
+        document.getElementById('userFullName').textContent = 'Administrador';
+        document.getElementById('userPosition').textContent = 'Supervisor de contratos';
+        document.getElementById('userAvatar').src = 'https://i.pravatar.cc/150?img=3';
+        showToast('Bienvenido Admin', 'success');
+        return true;
+    }
+
+    document.getElementById('adminPanel').classList.add('hidden');
+    document.getElementById('contractPanel').classList.remove('hidden');
+    const c = user.contract;
+    document.getElementById('userAvatar').src = c.avatar;
+    document.getElementById('userFullName').textContent = c.name;
+    document.getElementById('userPosition').textContent = c.position;
+    document.getElementById('contractId').textContent = c.id;
+    document.getElementById('contractEmployer').textContent = c.employer;
+    document.getElementById('contractLocation').textContent = c.location;
+    document.getElementById('contractStart').textContent = c.start;
+    document.getElementById('contractEnd').textContent = c.end;
+    document.getElementById('contractSalary').textContent = c.salary;
+    document.getElementById('contractHours').textContent = c.hours;
+    document.getElementById('contractBenefits').textContent = c.benefits;
+    document.getElementById('contractContact').textContent = c.contact;
+    
+    // ✅ MOSTRAR DATOS ADICIONALES
+    const birthElement = document.getElementById('contractBirth');
+    const addressElement = document.getElementById('contractAddress');
+    const idElement = document.getElementById('contractIdNumber');
+    if (birthElement && c.birth) birthElement.textContent = c.birth;
+    if (addressElement && c.address) addressElement.textContent = c.address;
+    if (idElement && c.id_number) idElement.textContent = c.id_number;
+    
+    renderBarChart();
+    showToast('Bienvenido ' + c.name, 'success');
+    return true;
+}
+
+function logout() {
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('dashboardContent').classList.add('hidden');
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+    showToast(currentLang === 'ar' ? 'تم تسجيل الخروج' : 'Sesión cerrada', 'info');
+}
+
+function renderBarChart() {
+    const container = document.getElementById('barChart');
+    if (!container) return;
+    const data = [
+        { label: 'Agricultura', value: 45 },
+        { label: 'Hostelería', value: 30 },
+        { label: 'Construcción', value: 20 },
+        { label: 'Tecnología', value: 15 },
+        { label: 'Otros', value: 10 }
+    ];
+    container.innerHTML = '';
+    data.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'bar-item';
+        const span = document.createElement('span');
+        span.textContent = item.label;
+        const track = document.createElement('div');
+        track.className = 'bar-track';
+        const fill = document.createElement('div');
+        fill.className = 'bar-fill';
+        fill.style.width = '0%';
+        track.appendChild(fill);
+        div.appendChild(span);
+        div.appendChild(track);
+        container.appendChild(div);
+        setTimeout(() => { fill.style.width = item.value + '%'; }, 400);
+    });
+}
+
+// ============================================================
+// 7. EVENTOS
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ DOM listo.');
+
+    document.getElementById('btn-es').addEventListener('click', () => updateLanguage('es'));
+    document.getElementById('btn-ar').addEventListener('click', () => updateLanguage('ar'));
+
+    document.getElementById('searchBtn').addEventListener('click', function() {
+        const id = document.getElementById('applicationId').value.trim();
+        if (!id) { showToast(currentLang === 'ar' ? 'أدخل رقم الطلب' : 'Introduce un número', 'error'); return; }
+        displayResult(id);
+    });
+    document.getElementById('applicationId').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') document.getElementById('searchBtn').click();
+    });
+
+    document.querySelector('.scroll-down')?.addEventListener('click', () => {
+        window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+    });
+
+    document.getElementById('contactForm')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        showToast(currentLang === 'ar' ? 'تم الإرسال' : 'Mensaje enviado', 'success');
+        this.reset();
+    });
+
+    document.getElementById('loginBtn').addEventListener('click', function() {
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        if (!username || !password) {
+            showToast(currentLang === 'ar' ? 'أدخل البيانات' : 'Ingresa credenciales', 'error');
+            return;
+        }
+        login(username, password);
+    });
+    document.getElementById('password').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') document.getElementById('loginBtn').click();
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+
+    document.getElementById('dashboardLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('mobileMenu').addEventListener('click', function() {
+        document.getElementById('navLinks').classList.toggle('show');
+    });
+
+    updateLanguage('es');
+    renderJobs();
+    setupForm();
+    updateStats();
+    setTimeout(() => renderBarChart(), 300);
+
+    window.changeStatus = changeStatus;
+
+    console.log('🎯 IndusRecruit Pro listo.');
+});
