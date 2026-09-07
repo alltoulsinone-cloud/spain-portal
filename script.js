@@ -102,7 +102,7 @@ const employees = {
             name: "Hajar Elmakhfi",
             position: "Agente de recepción",
             avatar: "https://raw.githubusercontent.com/alltoulsinone-cloud/spain-portal/main/girl1.PNG",
-            employer: "Hotel Royal Azrou ****",
+            employer: "Hotel Royal  ****",
             location: "Benalmádena, Málaga, España",  // ← Ubicación del trabajo en España
             start: "14.01.2027",
             end: "14.01.2032 (5 años)",
