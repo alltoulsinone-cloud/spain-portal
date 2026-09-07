@@ -32,6 +32,7 @@ const translations = {
         contract_id: "Nº contrato", contract_employer: "Empresa", contract_location: "Ubicación",
         contract_start: "Inicio", contract_end: "Fin", contract_salary: "Salario",
         contract_hours: "Horas", contract_benefits: "Beneficios", contract_contact: "Contacto",
+        contract_birth: "Fecha nacimiento", contract_address: "Dirección", contract_id_number: "Nº Identificación",
         stat_status: "Estado",
         gallery_title: "📸 Galería industrial", gallery_subtitle: "Imágenes de los centros de trabajo",
         contact_title: "¿Necesitas ayuda?", contact_desc: "Soporte 24/7",
@@ -71,6 +72,7 @@ const translations = {
         contract_id: "رقم العقد", contract_employer: "الشركة", contract_location: "الموقع",
         contract_start: "البدء", contract_end: "الانتهاء", contract_salary: "الراتب",
         contract_hours: "الساعات", contract_benefits: "المزايا", contract_contact: "جهة الاتصال",
+        contract_birth: "تاريخ الميلاد", contract_address: "العنوان", contract_id_number: "رقم التعريف",
         stat_status: "الحالة",
         gallery_title: "📸 معرض صناعي", gallery_subtitle: "صور من مراكز العمل والسكن",
         contact_title: "هل تحتاج مساعدة؟", contact_desc: "دعم 24/7",
@@ -94,26 +96,52 @@ let currentLang = 'es';
 // ============================================================
 
 const employees = {
-    // --- EJEMPLO 1: Recepcionista de hotel ---
-    "reception_girl": {
-        password: "1234",                           // 🔑 Contraseña de acceso
+    // --- EJEMPLO 1: Recepcionista de hotel (Hajar) ---
+    "hajar": {
+        password: "elmakhfi",                       // 🔑 Contraseña de acceso
         contract: {
-            id: "HOT-2026-088",                     // 📝 Número de contrato
-            name: "María López García",             // 👤 Nombre completo
-            position: "Recepcionista de hotel",     // 💼 Cargo / Puesto
-            avatar: "https://i.pravatar.cc/150?img=5", // 🖼️ Foto de perfil (URL)
-            employer: "Hotel Bahía del Sol ****",   // 🏢 Empresa
-            location: "Benalmádena, Málaga",        // 📍 Ubicación
-            start: "01.05.2026",                    // 📅 Fecha de inicio
-            end: "31.10.2026 (temporada)",          // 📅 Fecha de fin
-            salary: "1.450 € + bonos",              // 💰 Salario
-            hours: "39 h/semana",                   // ⏰ Horas semanales
+            id: "HAJAR-2026-099",                     // 📝 Número de contrato
+            name: "Hajar Elmakhfi",                 // 👤 Nombre completo
+            position: "Agente de recepción",        // 💼 Cargo / Puesto
+            avatar: "https://i.pravatar.cc/150?img=10", // 🖼️ Foto de perfil (URL)
+            employer: "Hotel Royal Azrou",          // 🏢 Empresa
+            location: "Azrou, Ifrane, Maroc",       // 📍 Ubicación
+            start: "01.09.2027",                    // 📅 Fecha de inicio
+            end: "31.08.2032 (5 año)",              // 📅 Fecha de fin
+            salary: "2.800 € + bonos",              // 💰 Salario
+            hours: "40 h/semana",                   // ⏰ Horas semanales
             benefits: "Seguro médico, alojamiento, comidas, formación en idiomas", // 🎁 Beneficios
-            contact: "Sra. Elena Ruiz - +34 600 111 222" // 📞 Contacto de emergencia
+            contact: "Sr. Ahmed Benjelloun - +212", // 📞 Contacto de emergencia
+            // ⬇️ Información adicional (personalizada para Hajar)
+            birth: "27.02.2006",                    // 🎂 Fecha de nacimiento
+            address: "AZROU IFRANE",                // 🏠 Dirección
+            id_number: "DA108522"                   // 🆔 Número de identificación
         }
     },
 
-    // --- EJEMPLO 2: Administrador (NO BORRAR) ---
+    // --- EJEMPLO 2: Recepcionista de hotel (reception_girl) ---
+    "reception_girl": {
+        password: "1234",
+        contract: {
+            id: "HOT-2026-088",
+            name: "María López García",
+            position: "Recepcionista de hotel",
+            avatar: "https://i.pravatar.cc/150?img=5",
+            employer: "Hotel Bahía del Sol ****",
+            location: "Benalmádena, Málaga",
+            start: "01.05.2026",
+            end: "31.10.2026 (temporada)",
+            salary: "1.450 € + bonos",
+            hours: "39 h/semana",
+            benefits: "Seguro médico, alojamiento, comidas, formación en idiomas",
+            contact: "Sra. Elena Ruiz - +34 600 111 222",
+            birth: "15.03.1998",
+            address: "Calle del Sol, 45, Málaga",
+            id_number: "ML789012"
+        }
+    },
+
+    // --- EJEMPLO 3: Administrador (NO BORRAR) ---
     "admin": {
         password: "admin",
         contract: null // ⚠️ No tocar - esto es para el panel de administración
@@ -130,12 +158,15 @@ const employees = {
     //         avatar: "https://i.pravatar.cc/150?img=10",
     //         employer: "Empresa S.L.",
     //         location: "Ciudad, País",
-    //         start: "01.01.2026",
-    //         end: "31.12.2026",
+    //         start: "14.01.2027",
+    //         end: "31.12.2032",
     //         salary: "2.000 €",
     //         hours: "40 h/semana",
     //         benefits: "Seguro médico, transporte",
-    //         contact: "RRHH - +34 600 000 000"
+    //         contact: "RRHH - +34 600 000 000",
+    //         birth: "01.01.1990",
+    //         address: "Dirección del empleado",
+    //         id_number: "ID123456"
     //     }
     // }
 };
@@ -537,6 +568,15 @@ function login(username, password) {
     document.getElementById('contractHours').textContent = c.hours;
     document.getElementById('contractBenefits').textContent = c.benefits;
     document.getElementById('contractContact').textContent = c.contact;
+    
+    // ✅ CAMPO NUEVO: Mostrar información adicional (birth, address, id_number)
+    const birthElement = document.getElementById('contractBirth');
+    const addressElement = document.getElementById('contractAddress');
+    const idElement = document.getElementById('contractIdNumber');
+    if (birthElement && c.birth) birthElement.textContent = c.birth;
+    if (addressElement && c.address) addressElement.textContent = c.address;
+    if (idElement && c.id_number) idElement.textContent = c.id_number;
+    
     renderBarChart();
     showToast('Bienvenido ' + c.name, 'success');
     return true;
@@ -593,51 +633,4 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!id) { showToast(currentLang === 'ar' ? 'أدخل رقم الطلب' : 'Introduce un número', 'error'); return; }
         displayResult(id);
     });
-    document.getElementById('applicationId').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') document.getElementById('searchBtn').click();
-    });
-
-    document.querySelector('.scroll-down')?.addEventListener('click', () => {
-        window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
-    });
-
-    document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-        e.preventDefault();
-        showToast(currentLang === 'ar' ? 'تم الإرسال' : 'Mensaje enviado', 'success');
-        this.reset();
-    });
-
-    document.getElementById('loginBtn').addEventListener('click', function() {
-        const username = document.getElementById('username').value.trim();
-        const password = document.getElementById('password').value.trim();
-        if (!username || !password) {
-            showToast(currentLang === 'ar' ? 'أدخل البيانات' : 'Ingresa credenciales', 'error');
-            return;
-        }
-        login(username, password);
-    });
-    document.getElementById('password').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') document.getElementById('loginBtn').click();
-    });
-
-    document.getElementById('logoutBtn').addEventListener('click', logout);
-
-    document.getElementById('dashboardLink').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
-    });
-
-    document.getElementById('mobileMenu').addEventListener('click', function() {
-        document.getElementById('navLinks').classList.toggle('show');
-    });
-
-    updateLanguage('es');
-    renderJobs();
-    setupForm();
-    updateStats();
-    setTimeout(() => renderBarChart(), 300);
-
-    window.changeStatus = changeStatus;
-
-    console.log('🎯 IndusRecruit Pro listo.');
-});
+    document.getElementById('application
