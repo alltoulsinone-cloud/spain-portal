@@ -9,7 +9,7 @@ const translations = {
         badge: "+500 Contratos activos 2026",
         hero_title: "Empleo industrial en España",
         hero_sub: "Plataforma oficial para trabajadores marroquíes. Busca ofertas, postula y sigue tu contrato.",
-        search_title: "Consultar solicitud", input_placeholder: "HM-MAR-2026-099", search_btn: "Buscar",
+        search_title: "Consultar solicitud", input_placeholder: "**-**-****-**", search_btn: "Buscar",
         stat_applied: "Solicitudes", stat_accepted: "Contratos", stat_companies: "Empresas", stat_pending: "Pendientes",
         jobs_title: "💼 Ofertas de trabajo activas", jobs_sub: "Selecciona una oferta y postula ahora mismo",
         apply_title: "📝 Postular a una oferta", apply_sub: "Completa los 3 pasos para enviar tu solicitud",
