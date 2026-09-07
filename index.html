@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IndusRecruit | Portal Industrial</title>
-    <link rel="stylesheet" href="style.css?v=3" />
+    <title>IndusRecruit Pro | Portal Industrial</title>
+    <link rel="stylesheet" href="style.css?v=4" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
@@ -46,7 +46,7 @@
                 <h3><i class="fas fa-search"></i> <span data-key="search_title">Consultar solicitud</span></h3>
                 <div class="input-group">
                     <i class="fas fa-id-card input-icon"></i>
-                    <input type="text" id="applicationId" placeholder="Ej: APP-123456" data-key="input_placeholder" />
+                    <input type="text" id="applicationId" placeholder="Ej: HM-MAR-2026-099" data-key="input_placeholder" />
                     <button id="searchBtn"><i class="fas fa-arrow-right"></i> <span data-key="search_btn">Buscar</span></button>
                 </div>
                 <div id="resultBox" class="result-box hidden"></div>
@@ -72,9 +72,7 @@
                 <h2 data-key="jobs_title">💼 Ofertas de trabajo activas</h2>
                 <p data-key="jobs_sub">Selecciona una oferta y postula ahora mismo</p>
             </div>
-            <div class="jobs-grid" id="jobsGrid">
-                <!-- Generado por JavaScript -->
-            </div>
+            <div class="jobs-grid" id="jobsGrid"></div>
         </div>
     </section>
 
@@ -98,16 +96,16 @@
                     <div class="step-content active" id="step1">
                         <h3 data-key="step_personal_title">📌 Datos personales</h3>
                         <div class="form-row">
-                            <div class="form-group"><label data-key="label_name">Nombre completo</label><input type="text" id="fullName" required placeholder="Ej: Ahmed Benjelloun" /></div>
-                            <div class="form-group"><label data-key="label_passport">Nº Pasaporte</label><input type="text" id="passport" required placeholder="AA123456" /></div>
+                            <div class="form-group"><label data-key="label_name">Nombre completo</label><input type="text" id="fullName" required placeholder="Ej: Hajar Elmakhfi" /></div>
+                            <div class="form-group"><label data-key="label_passport">Nº Pasaporte</label><input type="text" id="passport" required placeholder="DA108522" /></div>
                         </div>
                         <div class="form-row">
                             <div class="form-group"><label data-key="label_birth">Fecha nacimiento</label><input type="date" id="birthDate" required /></div>
                             <div class="form-group"><label data-key="label_phone">Teléfono</label><input type="tel" id="phone" required placeholder="0612345678" /></div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group"><label data-key="label_email">Email</label><input type="email" id="email" required placeholder="ahmed@mail.com" /></div>
-                            <div class="form-group"><label data-key="label_city">Ciudad (Marruecos)</label><input type="text" id="city" required placeholder="Casablanca" /></div>
+                            <div class="form-group"><label data-key="label_email">Email</label><input type="email" id="email" required placeholder="hajar@mail.com" /></div>
+                            <div class="form-group"><label data-key="label_city">Ciudad (Marruecos)</label><input type="text" id="city" required placeholder="Azrou Ifrane" /></div>
                         </div>
                         <button type="button" class="step-btn" data-next="2" data-key="next_btn">Siguiente →</button>
                     </div>
@@ -240,12 +238,9 @@
                                 <div class="contract-item"><span data-key="contract_hours">Horas:</span> <strong id="contractHours">---</strong></div>
                                 <div class="contract-item"><span data-key="contract_benefits">Beneficios:</span> <strong id="contractBenefits">---</strong></div>
                                 <div class="contract-item"><span data-key="contract_contact">Contacto:</span> <strong id="contractContact">---</strong></div>
-                                
-                                <!-- ⬇️⬇️⬇️ CAMPOS NUEVOS ⬇️⬇️⬇️ -->
                                 <div class="contract-item"><span data-key="contract_birth">Fecha nacimiento:</span> <strong id="contractBirth">---</strong></div>
                                 <div class="contract-item"><span data-key="contract_address">Dirección:</span> <strong id="contractAddress">---</strong></div>
                                 <div class="contract-item"><span data-key="contract_id_number">Nº Identificación:</span> <strong id="contractIdNumber">---</strong></div>
-                                <!-- ⬆️⬆️⬆️ CAMPOS NUEVOS ⬆️⬆️⬆️ -->
                             </div>
                             <div class="contract-stamp">
                                 <i class="fas fa-certificate"></i> Contrato validado por el Ministerio de Trabajo
@@ -318,6 +313,6 @@
 
     <div id="toast" class="toast hidden"></div>
 
-    <script src="script.js?v=3"></script>
+    <script src="script.js?v=4"></script>
 </body>
 </html>
